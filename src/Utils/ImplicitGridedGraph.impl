@@ -1,0 +1,269 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "ImplicitGridedGraph.h"
+
+template <class C, class V>
+ImplicitGridedGraph<C,V>::ImplicitGridedGraph(unsigned int gridWidth,
+	                                      unsigned int gridHeight,
+	                                      LinkedList< GraphArc <C,Vector2I,V> >& arcsPattern,
+	                                      unsigned int scale)
+: _gridWidth(gridWidth)
+, _gridHeight(gridHeight)      
+, _arcsPattern(arcsPattern)                      
+, _scale(scale)
+{
+	setPattern(_arcsPattern);
+}
+
+template <class C, class V>
+ImplicitGridedGraph<C,V>::ImplicitGridedGraph(unsigned int gridWidth,
+	                                      unsigned int gridHeight,
+	                                      GridedGraphNeighbourhood neighbourhood,
+	                                      unsigned int scale)
+: _gridWidth(gridWidth)
+, _gridHeight(gridHeight)                     
+, _scale(scale)                   
+{
+	switch(neighbourhood)
+	{		
+	case THIRTY_TWO :
+	{
+		Vector2I pos;
+		Vector2I dest;
+	    	pos = Vector2I(0,0);
+
+		dest = pos + Vector2I(-2,-3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-1,-3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,-3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(2,-3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-3,-2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-3,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(-3,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-3,2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-2,3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-1,3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(2,3);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(3,-2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(3,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(3,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(3,2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+	}
+	
+	case SIXTEEN :
+	{
+		Vector2I pos;
+		Vector2I dest;
+		pos = Vector2I(0,0);
+
+		dest = pos + Vector2I(-1,-2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,-2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-2,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(2,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-2,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(2,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+			
+		dest = pos + Vector2I(-1,2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,2);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+	}
+	case EIGHT :
+	{
+		Vector2I pos;
+		Vector2I dest;
+		pos = Vector2I(0,0);
+
+		dest = pos + Vector2I(-1,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(-1,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+	}
+	case FOUR :
+	{	
+		Vector2I pos;
+		Vector2I dest;			
+		pos = Vector2I(0,0);
+
+		dest = pos + Vector2I(-1,0);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(1,0);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(0,-1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );
+
+		dest = pos + Vector2I(0,1);
+                _arcsPattern.insert(GraphArc<float, Vector2I, Vector3F> (pos, dest, 0) );					
+	}
+	break;
+	}
+	
+	setPattern(_arcsPattern);
+}
+
+	
+template <class C, class V>
+ImplicitGridedGraph<C,V>::~ImplicitGridedGraph()
+{
+}
+
+template <class C, class V>
+V ImplicitGridedGraph<C,V>::_getNodeValue(const Vector2I& nodeKey)
+{
+        return V(nodeKey);
+}
+
+template <class C, class V>
+void ImplicitGridedGraph<C,V>::setPattern(LinkedList< GraphArc <C,Vector2I,V> >& arcsPattern)
+{
+        _arcsPattern = arcsPattern;
+        
+        // Empty cache 1
+        typename LinkedList< GraphArc <C,Vector2I,V>* >::LinkedListIterator it(&_arcCache);
+        while(it.hasNext())
+        {
+                it.next();
+                GraphArc <C,Vector2I,V>* current = it.value();
+                delete current;
+        }
+        _arcCache.empty();
+        
+        // Empty cache 2
+        typename LinkedList< GraphArc <C,Vector2I,V>* >::LinkedListIterator it2(&_arcCache);
+        while(it2.hasNext())
+        {
+                it2.next();
+                GraphArc <C,Vector2I,V>* current = it2.value();
+                delete current;
+        }
+        _arcCache2.empty();
+        
+        // Allocate cache 2
+        for (unsigned int i = 0; i < arcsPattern.getSize(); ++i)
+        {
+                _arcCache2.insert(new GraphArc <C,Vector2I,V> (Vector2I(), Vector2I(), 0));
+        }
+}
+
+template <class C, class V>
+bool ImplicitGridedGraph<C,V>::_isACorrectKey(const Vector2I& nodeKey)
+{
+        if (nodeKey.x < 0  || nodeKey.x >= _gridWidth
+            || nodeKey.y < 0 || nodeKey.y >= _gridHeight)
+            return false;
+            
+        return true;
+}
+
+template <class C, class V>
+LinkedList< GraphArc <C,Vector2I,V>* >& ImplicitGridedGraph<C,V>::_createArcs(const Vector2I& nodeKey)
+{
+        // Put the cache in cache2
+        while(_arcCache.getSize() > 0)
+        {
+                GraphArc <C,Vector2I,V>* current = _arcCache.popFirst();
+                _arcCache2.insert(current);
+        }
+        
+        // Create the cache
+        typename LinkedList< GraphArc <C,Vector2I,V> >::LinkedListIterator it(&_arcsPattern);
+        while(it.hasNext())
+        {
+                it.next();                
+                if (_isACorrectKey( it.value().getDestNodeKey() * int(_scale) + nodeKey) )
+                {                        
+                        GraphArc <C,Vector2I,V>* current = _arcCache2.popFirst();
+                        current->setSourceNodeKey(it.value().getSourceNodeKey() + nodeKey);
+                        current->setDestNodeKey(it.value().getDestNodeKey() * int(_scale) + nodeKey);
+	               _arcCache.insert(current);
+	        }
+        }
+        return _arcCache;
+}
+	
+template <class C, class V>
+bool ImplicitGridedGraph<C,V>::hasArcs(const Vector2I& nodeKey)
+{
+        return _isACorrectKey(nodeKey);
+}
+
+template <class C, class V>
+bool ImplicitGridedGraph<C,V>::contains(const Vector2I& nodeKey)
+{
+        return _isACorrectKey(nodeKey);
+}
+
+template <class C, class V>
+LinkedList< GraphArc<C,Vector2I,V>* >&  ImplicitGridedGraph<C,V>::getArcsFromNode(const Vector2I& nodeKey)
+{
+        return _createArcs(nodeKey);
+}	
+
+template <class C, class V>	
+GraphNode<C,Vector2I,V>& ImplicitGridedGraph<C,V>::getNode(const Vector2I& nodeKey)
+{
+        _nodeCache = GraphNode<C,Vector2I,V>(nodeKey, _getNodeValue(nodeKey));       
+        return _nodeCache;
+}
+
+
+template <class C, class V>
+void ImplicitGridedGraph<C,V>::detail()
+{
+}

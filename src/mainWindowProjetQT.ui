@@ -1,0 +1,2741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProjetQT</class>
+ <widget class="QMainWindow" name="ProjetQT">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>771</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Road Project</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>1000</width>
+     <height>750</height>
+    </size>
+   </property>
+   <layout class="QHBoxLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="widget_TerrainEditor" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>161</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>175</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_13">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>110</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Scenes test</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerRock">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Rock</string>
+            </property>
+            <widget class="QPushButton" name="Rock_Gaussian_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Add or Remove Gaussian Rock</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Rock_Smooth_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Smooth Rock Layer</string>
+             </property>
+             <property name="text">
+              <string>Sm</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Rock_Equalize_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Rock Other 1</string>
+             </property>
+             <property name="text">
+              <string>Ap</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Rock_Other2_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Rock Other 2</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Rock_Other1_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add or Remove Mountain</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerSand">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Sand</string>
+            </property>
+            <widget class="QPushButton" name="Sand_Gaussian_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add or Remove Sand</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Sand_Remove_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Remove All Sand</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Sand_Other1_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Sand Other 1</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Sand_Other2_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Sand Other 2</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Sand_Stabilize_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Sand Stabilization</string>
+             </property>
+             <property name="text">
+              <string>St</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerEarth">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Earth</string>
+            </property>
+            <widget class="QPushButton" name="Earth_Gaussian_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add or Remove Earth</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Earth_Remove_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Remove All Earth</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Earth_Other1_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Earth Other 1</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Earth_Other2_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Earth Other 2</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Earth_Other3_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Earth Other 3</string>
+             </property>
+             <property name="text">
+              <string>o3</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerGrass">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Grass</string>
+            </property>
+            <widget class="QPushButton" name="Grass_Gaussian_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add grass</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Grass_Other3_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Grass other 2</string>
+             </property>
+             <property name="text">
+              <string>o3</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Grass_Other1_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Remove All Grass</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Grass_Remove_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add Some Grass</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Grass_Other2_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Grass Other 1</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerWater">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Water</string>
+            </property>
+            <widget class="QPushButton" name="Water_Remove_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Remove All Water</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Water_Gaussian_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add or Remove Water</string>
+             </property>
+             <property name="text">
+              <string>G</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Water_Other1_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Water Other 1</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Water_Other3_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Water Other 3</string>
+             </property>
+             <property name="text">
+              <string>o3</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Water_Other2_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Water Other 2</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_LayerTree">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>41</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Tree</string>
+            </property>
+            <widget class="QPushButton" name="Tree_AddOne_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add a Tree</string>
+             </property>
+             <property name="text">
+              <string>+T</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Tree_AddMultiple_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add Some Tree</string>
+             </property>
+             <property name="text">
+              <string>+Ts</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Tree_Remove_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Remove All Tree</string>
+             </property>
+             <property name="text">
+              <string>R</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Tree_Lighten_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Tree Eclaircir</string>
+             </property>
+             <property name="text">
+              <string>Ecl</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Tree_Load_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>10</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Tree Load some tree</string>
+             </property>
+             <property name="text">
+              <string>Ld</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="Road_groupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Road</string>
+            </property>
+            <widget class="QPushButton" name="Road_AddFlag_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>9</x>
+               <y>40</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Add a Flag</string>
+             </property>
+             <property name="text">
+              <string>+</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Save_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>40</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Save Road</string>
+             </property>
+             <property name="text">
+              <string>Sv</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Load_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>40</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Load Road</string>
+             </property>
+             <property name="text">
+              <string>Ld</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_ModifyControlPointFlag_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>40</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Create Connection</string>
+             </property>
+             <property name="text">
+              <string>Mp</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QSpinBox" name="Road_Selected_spinBox">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>60</x>
+               <y>10</y>
+               <width>42</width>
+               <height>22</height>
+              </rect>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_New_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>40</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>New</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Delete_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>110</x>
+               <y>10</y>
+               <width>40</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_LocalFlag_pushButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>40</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Road Other 1</string>
+             </property>
+             <property name="text">
+              <string>Loc</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Other3_pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>70</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Flag Other 3</string>
+             </property>
+             <property name="text">
+              <string>o3</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Other2_pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>70</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Flag Other 2</string>
+             </property>
+             <property name="text">
+              <string>o2</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Other1_pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>70</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Flag Other 1</string>
+             </property>
+             <property name="text">
+              <string>o1</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Other4_pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>100</x>
+               <y>70</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Flag Other 4</string>
+             </property>
+             <property name="text">
+              <string>o4</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="Road_Other5_pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>130</x>
+               <y>70</y>
+               <width>25</width>
+               <height>25</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Flag Other 5</string>
+             </property>
+             <property name="text">
+              <string>o5</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="stackedWidget_EditorParametre">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>161</width>
+              <height>197</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>3</number>
+            </property>
+            <widget class="QWidget" name="page"/>
+            <widget class="QWidget" name="page_4">
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_EditorRadiusSimple">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>20</y>
+                <width>62</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="maximum">
+               <double>1000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>20.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_9">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>20</y>
+                <width>46</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Radius</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_10">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>81</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Parameter :</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="page_2">
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_EditorRadius">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>20</y>
+                <width>62</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="maximum">
+               <double>1000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>20.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>20</y>
+                <width>46</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Radius</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_2">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>46</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Thickness</string>
+              </property>
+             </widget>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_EditorThickness">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>50</y>
+                <width>62</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="value">
+               <double>2.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>81</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Parameter :</string>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="page_3"/>
+            <widget class="QWidget" name="page_5">
+             <widget class="QLabel" name="label_16">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>81</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Tool Parameter:</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_17">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>20</y>
+                <width>46</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Radius</string>
+              </property>
+             </widget>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_VegetationToolMultipleRadius">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>20</y>
+                <width>62</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="value">
+               <double>20.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_18">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>50</y>
+                <width>61</width>
+                <height>21</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Percentage</string>
+              </property>
+             </widget>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_VegetationToolMultiplePercentage">
+              <property name="geometry">
+               <rect>
+                <x>70</x>
+                <y>50</y>
+                <width>62</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="maximum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.500000000000000</double>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="page_6">
+             <widget class="QLabel" name="label_24">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>76</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="text">
+               <string>Parameter :</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_14">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>30</y>
+                <width>61</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; width &gt;</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_15">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>60</y>
+                <width>61</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; Nb VG &gt;</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_19">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>90</y>
+                <width>61</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; Nb VD &gt;</string>
+              </property>
+             </widget>
+             <widget class="QDoubleSpinBox" name="doubleSpinBox_roadWidth">
+              <property name="geometry">
+               <rect>
+                <x>90</x>
+                <y>30</y>
+                <width>51</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="decimals">
+               <number>2</number>
+              </property>
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99.989999999999995</double>
+              </property>
+              <property name="value">
+               <double>3.000000000000000</double>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="spinBox_roadNbVG">
+              <property name="geometry">
+               <rect>
+                <x>90</x>
+                <y>60</y>
+                <width>51</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>99</number>
+              </property>
+              <property name="value">
+               <number>2</number>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="spinBox_roadNbVD">
+              <property name="geometry">
+               <rect>
+                <x>90</x>
+                <y>90</y>
+                <width>51</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>99</number>
+              </property>
+              <property name="value">
+               <number>2</number>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_20">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>120</y>
+                <width>61</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; Median &gt;</string>
+              </property>
+             </widget>
+             <widget class="QCheckBox" name="checkBox_roadMedian">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>120</y>
+                <width>21</width>
+                <height>18</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+             <widget class="QPushButton" name="pushButton_ChangeAllCP">
+              <property name="geometry">
+               <rect>
+                <x>40</x>
+                <y>210</y>
+                <width>75</width>
+                <height>23</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Change all</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_21">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>150</y>
+                <width>81</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; BarrierLeft &gt;</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_22">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>180</y>
+                <width>81</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>&lt; BarrierRight &gt;</string>
+              </property>
+             </widget>
+             <widget class="QCheckBox" name="checkBox_roadBarrierLeft">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>150</y>
+                <width>21</width>
+                <height>18</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+             <widget class="QCheckBox" name="checkBox_roadBarrierRight">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>180</y>
+                <width>21</width>
+                <height>18</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="page_7">
+             <widget class="QPushButton" name="Edit_Local_PushOK">
+              <property name="geometry">
+               <rect>
+                <x>40</x>
+                <y>140</y>
+                <width>75</width>
+                <height>23</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>OK</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="Edit_Local_LabelPoint">
+              <property name="geometry">
+               <rect>
+                <x>30</x>
+                <y>10</y>
+                <width>91</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>No point selected</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="Edit_Local_LabelGauche">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>30</y>
+                <width>71</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Nv gauches</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="Edit_Local_LabelDroite">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>50</y>
+                <width>71</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Nv droites</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="Edit_Local_LabelLargeur">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>70</y>
+                <width>71</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Largeur</string>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="Edit_Local_SpinGauche">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>30</y>
+                <width>51</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QSpinBox" name="Edit_Local_SpinDroite">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>50</y>
+                <width>51</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="Edit_Local_EditLargeur">
+              <property name="geometry">
+               <rect>
+                <x>100</x>
+                <y>70</y>
+                <width>51</width>
+                <height>20</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>4</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_BoxGLBouton" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton_ModeTerrain">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>95</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Terrain</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_ModeNetworkGraph">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>95</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Network Graph</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_GL" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_CalculRoute" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>295</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>315</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <property name="margin">
+        <number>1</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_ShortestPath">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>291</width>
+           <height>380</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Shortest Path</string>
+         </property>
+         <widget class="QPushButton" name="ShortestPath_Dijkstra_pushButton">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>61</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Dijkstra</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_46">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>50</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Masq size :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="ShortestPath_MasqSize_spinBox">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>50</y>
+            <width>40</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="currentIndex">
+           <number>3</number>
+          </property>
+          <property name="maxVisibleItems">
+           <number>15</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>1.4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1.8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>7</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>9</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>10</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ComputeOrientation">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>80</y>
+            <width>77</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>Orientation</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ComputeOrientation">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>80</y>
+            <width>42</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ComputeBridge">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>140</y>
+            <width>71</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Bridge</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ComputeTunnel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>170</y>
+            <width>71</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Tunnel</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ComputeBridge1">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>140</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ComputeTunnel">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>170</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>30</number>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ComputeSurface">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>110</y>
+            <width>71</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Surface</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ComputeSurface">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>110</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_Bridge1lMin">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>140</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>20</number>
+          </property>
+         </widget>
+         <widget class="Line" name="line_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>70</y>
+            <width>291</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_Bridge1lMax">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>140</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>120</y>
+            <width>41</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>l Min</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>241</x>
+            <y>110</y>
+            <width>41</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>l Max</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_TunnellMin">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>170</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>10</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_TunnellMax">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>170</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_11">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>250</y>
+            <width>291</width>
+            <height>131</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>SlopeCost</string>
+          </property>
+          <widget class="QLabel" name="label_6">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>30</y>
+             <width>46</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>MaxSlope</string>
+           </property>
+          </widget>
+          <widget class="QWidget" name="widget_fonctionCoutHeightfield" native="true">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>15</y>
+             <width>231</width>
+             <height>110</height>
+            </rect>
+           </property>
+           <property name="statusTip">
+            <string>Fonction de coût de la carte de hauteur</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="spinBox_CostSlopeMax">
+           <property name="geometry">
+            <rect>
+             <x>230</x>
+             <y>50</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="value">
+            <number>15</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_7">
+           <property name="geometry">
+            <rect>
+             <x>270</x>
+             <y>50</y>
+             <width>21</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>%</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_8">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>80</y>
+            <width>61</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Nb Quartier</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_OrientationNbQuartier">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>80</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>180</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ShortestPathSampling">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>200</y>
+            <width>71</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Sampling</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ShortestPathSamples">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>200</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>2000</number>
+          </property>
+          <property name="value">
+           <number>20</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_11">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>50</y>
+            <width>51</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Grid Size :</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="ShortestPath_GridSize_spinBox">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>50</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>10</number>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_ComputeForest">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>230</y>
+            <width>71</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Forest</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_ComputeForest">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>230</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>999</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="ShortestPath_AStar_pushButton">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>20</y>
+            <width>61</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>A*</string>
+          </property>
+         </widget>
+         <widget class="Line" name="line_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>40</y>
+            <width>291</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="ShortestPath_ExportImages_checkBox">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>10</y>
+            <width>61</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Export 
+ Images</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>291</width>
+           <height>251</height>
+          </size>
+         </property>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>0</y>
+            <width>141</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Foret</string>
+          </property>
+          <widget class="QListWidget" name="listWidgetForet">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>121</width>
+             <height>141</height>
+            </rect>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DropOnly</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_ForestAdd">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_ForestRemove">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>170</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_ForestAddTree">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>220</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Add Tree</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_ForestRemoveTree">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>220</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Rem Tree</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>141</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Arbres</string>
+          </property>
+          <widget class="QListWidget" name="listWidgetTreeType">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>121</width>
+             <height>141</height>
+            </rect>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::DragOnly</enum>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_TreeTypeAdd">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_TreeTypeRemove">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>170</y>
+             <width>60</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Remove</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_27">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>111</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Height Parameter :</string>
+           </property>
+          </widget>
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_VegetationHeightMax">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>220</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="value">
+            <double>6.000000000000000</double>
+           </property>
+          </widget>
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_VegetationHeightMin">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>220</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="value">
+            <double>3.000000000000000</double>
+           </property>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuExport">
+     <property name="title">
+      <string>Export</string>
+     </property>
+     <addaction name="actionExport_Scene"/>
+     <addaction name="separator"/>
+     <addaction name="actionExport_TextureIGN"/>
+    </widget>
+    <widget class="QMenu" name="menuImport">
+     <property name="title">
+      <string>Import</string>
+     </property>
+     <addaction name="actionImport_Heightfield"/>
+    </widget>
+    <addaction name="actionNew"/>
+    <addaction name="actionLoad"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="menuImport"/>
+    <addaction name="menuExport"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="action_Affiche_mesh_route">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche « mesh » route </string>
+   </property>
+  </action>
+  <action name="action_Affiche_Chemin_Route">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Chemin Route </string>
+   </property>
+  </action>
+  <action name="action_Affiche_Points_de_controle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Points de contrôle </string>
+   </property>
+  </action>
+  <action name="actionAffiche_d_saffiche_points_de_contr_le">
+   <property name="text">
+    <string>Affiche/ Désaffiche points de contrôle</string>
+   </property>
+  </action>
+  <action name="action_Affiche_Signalisation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Signalisation</string>
+   </property>
+  </action>
+  <action name="action_Affiche_Borne">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Borne </string>
+   </property>
+  </action>
+  <action name="action_Affiche_Point_Discret">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Point Discret</string>
+   </property>
+  </action>
+  <action name="action_Affiche_Grille">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Affiche / Désaffiche Grille</string>
+   </property>
+  </action>
+  <action name="actionMode_Carte_IGN">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mode : Carte IGN</string>
+   </property>
+  </action>
+  <action name="actionMode_Texture">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mode : Texture</string>
+   </property>
+  </action>
+  <action name="actionExport_SceneIGN">
+   <property name="text">
+    <string>Export Scene IGN (.fbx)</string>
+   </property>
+  </action>
+  <action name="actionExport_Scene">
+   <property name="text">
+    <string>Export Scene (.fbx)</string>
+   </property>
+  </action>
+  <action name="actionImport_Heightfield">
+   <property name="text">
+    <string>Heightfield</string>
+   </property>
+  </action>
+  <action name="actionExport_TextureIGN">
+   <property name="text">
+    <string>Export Texture IGN (.png)</string>
+   </property>
+  </action>
+  <action name="actionExport_Texture_TreePath_png">
+   <property name="text">
+    <string>Export Texture TreePaths (.png)</string>
+   </property>
+  </action>
+  <action name="actionExport_City_MEL">
+   <property name="text">
+    <string>Export City (.MEL)</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

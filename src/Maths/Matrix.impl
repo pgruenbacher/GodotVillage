@@ -1,0 +1,329 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "Matrix.h"
+
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns>::Matrix()
+{
+    for(unsigned int i = 0; i< _nbLines*_nbColumns; ++i)
+    {
+        _array[i] = T(0);
+    }
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns>::Matrix(const Matrix<T,_nbLines,_nbColumns>& matrix)
+{
+    for(unsigned int i = 0; i< _nbLines*_nbColumns; ++i)
+    {
+        _array[i] = matrix._array[i];
+    }
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns>& Matrix<T,_nbLines,_nbColumns>::operator=(const Matrix<T,_nbLines,_nbColumns>& matrix)
+{
+    for(unsigned int i = 0; i< _nbLines*_nbColumns; ++i)
+    {
+        _array[i] = matrix._array[i];
+    }
+    return *this;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns> Matrix<T,_nbLines,_nbColumns>::identity()
+{
+    Matrix<T,_nbLines,_nbColumns> identity;
+    for(unsigned int i = 0; i< _nbLines; ++i)
+    {
+        for(unsigned int j = 0; j < _nbColumns; ++j)
+        {
+            if(i == j)
+            {
+                identity.get(i,j) = T(1);
+            }
+        }
+    }
+    return identity;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+const T* Matrix<T,_nbLines,_nbColumns>::getArray() const
+{
+    return _array;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+unsigned int Matrix<T,_nbLines,_nbColumns>::getNbLines() const
+{
+    return _nbLines;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+unsigned int Matrix<T,_nbLines,_nbColumns>::getNbColumns() const
+{
+    return _nbColumns;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbColumns,_nbLines> Matrix<T,_nbLines,_nbColumns>::transpose(const Matrix<T,_nbLines,_nbColumns>& matrix)
+{
+    Matrix<T,_nbColumns,_nbLines> result;
+    for(unsigned int i = 0; i < _nbColumns; ++i)
+    {
+        for(unsigned int j = 0; j < _nbLines; ++j)
+        {
+            result.get(i,j) = matrix.get(j,i);
+        }
+    }
+    return result;
+}
+
+template<class T, unsigned int _nbLines, unsigned _nbColumns>
+Matrix<T,_nbLines,_nbColumns> operator*( const T& a,
+        const Matrix<T,_nbLines,_nbColumns> &m )
+{
+    Matrix<T,_nbLines,_nbColumns> result;
+
+    for(unsigned int i = 0; i < _nbLines * _nbColumns; ++i)
+    {
+        result[i] = m[i] * a;
+    }
+    return result;
+}
+
+
+template<class T, unsigned int _nbLines, unsigned int _nbColumns2, unsigned _nbColumns>
+Matrix<T,_nbLines,_nbColumns> operator*( const Matrix<T,_nbLines,_nbColumns2> &m1,
+        const Matrix<T,_nbColumns2,_nbColumns> &m2 )
+{
+    Matrix<T,_nbLines,_nbColumns> result;
+
+
+    for(unsigned int i = 0; i < _nbLines; ++i)
+    {
+        for(unsigned int j = 0; j < _nbColumns; ++j)
+        {
+            T mij = T(0);
+            for(unsigned int ii = 0; ii < _nbColumns2; ++ii)
+            {
+                mij += m1.get(i,ii)*m2.get(ii,j);
+            }
+            result.get(i,j) = mij;
+        }
+    }
+    return result;
+}
+
+template<class T, unsigned int _nbLines, unsigned _nbColumns>
+Matrix<T,_nbLines,_nbColumns> operator+( const Matrix<T,_nbLines,_nbColumns> &m1,
+        const Matrix<T,_nbLines,_nbColumns> &m2 )
+{
+    Matrix<T,_nbLines,_nbColumns> result;
+
+
+    for(unsigned int i = 0; i < _nbLines * _nbColumns; ++i)
+    {
+        result[i] = m1[i] + m2[i];
+    }
+    return result;
+}
+
+template<class T, unsigned int _nbLines, unsigned _nbColumns>
+Matrix<T,_nbLines,_nbColumns> operator-( const Matrix<T,_nbLines,_nbColumns> &m1,
+        const Matrix<T,_nbLines,_nbColumns> &m2 )
+{
+    Matrix<T,_nbLines,_nbColumns> result;
+
+    for(unsigned int i = 0; i < _nbLines * _nbColumns; ++i)
+    {
+        result[i] = m1[i] - m2[i];
+    }
+    return result;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+bool Matrix<T,_nbLines,_nbColumns>::operator==(const Matrix<T,_nbLines,_nbColumns>& m)
+{
+    for(unsigned int i = 0; i < _nbLines * _nbColumns; ++i)
+    {
+        if(_array[i] != m._array[i])
+            return false;
+    }
+
+    return true;
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+T& Matrix<T,_nbLines,_nbColumns>::operator[](unsigned int index)
+{
+    return _array[index];
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+T Matrix<T,_nbLines,_nbColumns>::operator[](unsigned int index) const
+{
+    return _array[index];
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+T& Matrix<T,_nbLines,_nbColumns>::get(unsigned int line, unsigned int column)
+{
+    return _array[COORD(line,column,_nbColumns)];
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+T Matrix<T,_nbLines,_nbColumns>::get(unsigned int line, unsigned int column) const
+{
+    return _array[COORD(line,column,_nbColumns)];
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns> Matrix<T,_nbLines,_nbColumns>::invert(const Matrix<T,_nbLines,_nbColumns>& matrix)
+{
+    Matrix<T,_nbLines,_nbColumns> identity = Matrix<T,_nbLines,_nbColumns>::identity();
+    Matrix<T,_nbLines,_nbColumns> L;
+    Matrix<T,_nbLines,_nbColumns> U;
+
+    LUfacto(matrix, &L, &U);
+//	LUfacto(matrix,NULL,NULL);
+
+    Matrix<T,_nbLines,_nbColumns> Y = ForwardLU(L,identity);
+    return BackwardLU(U,Y);
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns> Matrix<T,_nbLines,_nbColumns>::invertOfUpperTriangularMatrix(const Matrix<T,_nbLines,_nbColumns>& matrix)
+{
+    Matrix<T,_nbLines,_nbColumns> inv();
+
+    for(int currentColumn = matrix.getNbColumns() - 1; currentColumn >= 0; --currentColumn)
+    {
+        // The diagonal element is equal to the inverse of the diagonal element.
+        inv.get(currentColumn, currentColumn) = 1.f / matrix.get(currentColumn, currentColumn);
+
+        // The sum of terms is equal to zero,
+        // we solve a linear system for each line
+        for(int currentLine = currentColumn - 1; currentLine >= 0; --currentLine)
+        {
+            float sum = 0.f;
+            for(int i = currentLine + 1; i < matrix.getNbLines(); ++i)
+            {
+                sum -= matrix.get(currentLine, i) * inv.get(i, currentColumn);
+            }
+            inv.get(currentLine, currentColumn) = sum / matrix.get(currentLine, currentLine);
+        }
+    }
+
+    return inv;
+}
+
+/*
+	Problem : AX = b
+	LU Factorization : AX = LUX = b
+	Find Solution to LY = b (UX = Y)
+*/
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns> Matrix<T,_nbLines,_nbColumns>::ForwardLU(Matrix<T,_nbLines,_nbColumns>& L,
+        Matrix<T,_nbLines,_nbColumns>& b)
+{
+    // L is a lower triangular matrix
+    Matrix<T,_nbLines,_nbColumns> result;
+
+    // Solve for each column of matrix b
+    for (unsigned int j=0; j<b.getNbColumns(); ++j)
+    {
+        for (unsigned int i=0; i<b.getNbLines(); ++i)
+        {
+            T resultij(b.get(i,j));
+            for (unsigned int k=0; k<i; ++k)
+            {
+                resultij -= L.get(i,k) * result.get(k,j);
+            }
+            result.get(i,j) = resultij / L.get(i,i);
+        }
+    }
+    return result;
+}
+
+
+/*
+	Problem : AX = b
+	LU Factorization : AX = LUX = b
+	Find Solution to UX = Y (LY = b)
+*/
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+Matrix<T,_nbLines,_nbColumns> Matrix<T,_nbLines,_nbColumns>::BackwardLU(Matrix<T,_nbLines,_nbColumns>& U,
+        Matrix<T,_nbLines,_nbColumns>& Y)
+{
+    // U is an upper triangular matrix
+    Matrix<T,_nbLines,_nbColumns> result;
+
+    // Solve for each column of matrix Y
+    for (int j=0; j<static_cast<int>(Y.getNbColumns()); ++j)
+    {
+        for (int i=Y.getNbLines()-1; i>=0; --i)
+        {
+            T resultij(Y.get(i,j));
+            for (int k=Y.getNbLines()-1; k>i; --k)
+            {
+                resultij -= U.get(i,k) * result.get(k,j);
+            }
+            result.get(i,j) = resultij / U.get(i,i);
+        }
+    }
+    return result;
+}
+
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+void Matrix<T,_nbLines,_nbColumns>::LUfacto(const Matrix<T,_nbLines,_nbColumns>& matrix,
+        Matrix<T,_nbLines,_nbColumns>* L,
+        Matrix<T,_nbLines,_nbColumns>* U)
+{
+    // L is initialised to Identity
+    *L = Matrix<T,_nbLines,_nbColumns>::identity();
+
+    // U is initialised to matrix
+    *U = matrix;
+
+    for(unsigned int pivotLine = 0; pivotLine < matrix.getNbLines() - 1; ++pivotLine)
+    {
+        float pivot = (*U).get(pivotLine, pivotLine);
+        for(unsigned int currentLine = pivotLine + 1;  currentLine < matrix.getNbLines(); ++currentLine)
+        {
+            float value = (*U).get(currentLine, pivotLine);
+            for(unsigned int currentCol = pivotLine; currentCol < matrix.getNbColumns(); ++currentCol)
+            {
+                float mijj  = (*U).get(pivotLine, currentCol);
+                float miijj = (*U).get(currentLine, currentCol);
+                (*U).get(currentLine, currentCol) = miijj - mijj * value / pivot;
+
+                float lijj  = (*L).get(pivotLine, currentCol);
+                float liijj = (*L).get(currentLine, currentCol);
+                (*L).get(currentLine, currentCol) = liijj + lijj * value / pivot;
+            }
+        }
+    }
+}
+
+template <class T, unsigned int _nbLines, unsigned int _nbColumns>
+std::ostream& operator<<(std::ostream &os, const Matrix<T,_nbLines,_nbColumns>& m)
+{
+    for (unsigned int i = 0; i < m.getNbLines(); ++i)
+    {
+        for (unsigned int j = 0; j < m.getNbColumns(); ++j)
+        {
+            os << m.get(i,j);
+            os << ", ";
+        }
+        os << std::endl;
+    }
+    return os;
+}
+

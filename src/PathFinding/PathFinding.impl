@@ -1,0 +1,213 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "PathFinding.h"
+
+
+
+template <class C, class K, class V>
+HashTable<K, C> PathFinding<C,K,V>::KeyAndCost::_estimatedTotalTravelCosts(100000);
+
+template <class C, class K, class V>
+LinkedList<K> PathFinding<C,K,V>::aStar(const K& sourceNodeKey,
+                                        const K& targetNodeKey,
+                                        Graph<C,K,V>* graph,
+                                        LinkedList< Pair<CostFunctor<C,K,V>*, Layout<C,K,V>* > >& costLayouts)
+{
+    HashTable<K,K>   fathers(100000);
+    HashTable<K,K>   visitedNodes(100000);
+    Heap<KeyAndCost> nodesToVisit(true); // ascending order
+
+    HashTable<K, C>  costsFromSource(100000);
+    HashTable<K, C>& estimatedTotalTravelCosts = KeyAndCost::getEstimatedTotalCosts();
+    estimatedTotalTravelCosts.empty();
+
+    // Initialisation
+    K start       = sourceNodeKey;
+    K goal        = targetNodeKey;
+    V sourceValue = graph->getNode(sourceNodeKey).getPair().getValue();
+    V goalValue   = graph->getNode(targetNodeKey).getPair().getValue();
+
+    nodesToVisit.insert(start);
+    costsFromSource.insert(start, 0);
+    estimatedTotalTravelCosts.insert(start, norm(goalValue - sourceValue));
+
+    // Compute the path
+    while(nodesToVisit.getSize() > 0)
+    {
+        // Get the minimum value in the nodes to visit
+        K min = nodesToVisit.popFirst().getKey();
+        //std::cout << "Current node " << min << std::endl;
+
+        // Find the path to the min
+        LinkedList<K> path = reconstructPath(fathers, min, false, 3);
+
+        // Is it the goal ?
+        if (min == goal)
+        {
+            std::cout << "Goal reached." << std::endl;
+            path = reconstructPath(fathers, min, true);
+            return path;
+        }
+
+        // Set the Node as visited
+        visitedNodes.insert(min, min);
+
+        // Search the best path in neighbourhood
+        if (!graph->hasArcs(min))
+        {
+            //std::cout << "0 arcs." << std::endl;
+            continue;
+        }
+        LinkedList< GraphArc<C,K,V>* >& neighbours = graph->getArcsFromNode(min);
+        typename LinkedList< GraphArc<C,K,V>* >::LinkedListIterator it(&neighbours);
+        while (it.hasNext())
+        {
+            it.next();
+            // Get Key and Value
+            GraphArc<C,K,V>* currentArc = it.value();
+            K nKey   = currentArc->getDestNodeKey();
+            //std::cout << "Current neighbour : " << nKey << std::endl;
+            V nValue = graph->getNode(nKey).getPair().getValue();
+
+            // Ignore visited Nodes
+            if (visitedNodes.contains(currentArc->getDestNodeKey()))
+            {
+                //std::cout << "Ignoring visited nodes ." << std::endl;
+                continue;
+            }
+            //std::cout << "Current neighbour : " << nKey << std::endl;
+
+            // Initialisation
+            bool bestPathToGoThere = false;
+
+            // Compute the cost to go to the Node n
+            // via the best path to the Node min.
+            C arcCost = computeTravelCost(currentArc, graph, path, costLayouts);
+
+            C tentativeCostFromSource = costsFromSource[min] + arcCost;
+
+
+            // If it is the first times that we go the the Node n
+            // We add the path in the list.
+            if (! nodesToVisit.contains(nKey))
+            {
+                bestPathToGoThere = true;
+            }
+            // If the path is better than the last path.
+            else if (tentativeCostFromSource < costsFromSource[nKey])
+            {
+                bestPathToGoThere = true;
+            }
+            // The path is not interesting.
+            else
+            {
+                bestPathToGoThere = false;
+            }
+
+            // The best path is via the Node min
+            if (bestPathToGoThere)
+            {
+                // Save the father for the path computation
+                if (fathers.contains(nKey))
+                    fathers[nKey] = min;
+                else
+                    fathers.insert(nKey,min);
+
+                // Insert the cost
+                if (costsFromSource.contains(nKey))
+                {
+                    costsFromSource[nKey] = tentativeCostFromSource;
+                }
+                else
+                {
+                    costsFromSource.insert(nKey,tentativeCostFromSource);
+                }
+
+                // Insert the total cost
+                if (estimatedTotalTravelCosts.contains(nKey))
+                {
+                    estimatedTotalTravelCosts[nKey] = costsFromSource[nKey]
+                                                      + norm(nValue - goalValue);
+                }
+                else
+                {
+                    estimatedTotalTravelCosts.insert(nKey, costsFromSource[nKey]
+                                                     + norm(nValue - goalValue));
+                }
+
+                if (! nodesToVisit.contains(nKey))
+                {
+                    nodesToVisit.insert(nKey);
+                }
+
+            }
+            else
+            {
+            }
+
+        }
+    }
+    std::cout << "Failed to reach the goal." << std::endl;
+    return LinkedList<K> ();
+}
+
+template <class C, class K, class V>
+LinkedList<K> PathFinding<C,K,V>::reconstructPath(HashTable<K,K>&  fathers, K& goal, bool unlimited, unsigned int maxLength)
+{
+    LinkedList<K> path;
+    path.pushLast(goal);
+    int length = 1;
+    K current = goal;
+    while (fathers.contains(current) && (unlimited || (length < maxLength)))
+    {
+        current = fathers[current];
+        path.pushLast(current);
+        ++length;
+    }
+    return path;
+}
+
+
+template <class C, class K, class V>
+C PathFinding<C,K,V>::computeTravelCost(GraphArc<C,K,V>* arc,
+                                        Graph<C,K,V>* graph,
+                                        LinkedList <K>& path,
+                                        LinkedList< Pair<CostFunctor<C,K,V>*, Layout<C,K,V>* > >& costLayouts)
+{
+    // ADD, by default, the cost of the Arc.
+    C cost = arc->getTravelCost();
+
+    // ADD the cost of all travel on each layout.
+    typename LinkedList< Pair<CostFunctor<C,K,V>*, Layout<C,K,V>* > >::LinkedListIterator it(&costLayouts);
+    while (it.hasNext())
+    {
+        it.next();
+        cost += it.value().getKey()->evaluate(arc,
+                                              graph,
+                                              path,
+                                              *(it.value().getValue()));
+    }
+    return cost;
+}
+
+
+template <class C, class K, class V>
+LinkedList< GraphNode<C,K,V> > PathFinding<C,K,V>::reconstructNodesPath(Table<K>& path, Graph<C,K,V>* graph)
+{
+    LinkedList< GraphNode<C,K,V> > nodesPath;
+    unsigned int size = path.getSize();
+    for (unsigned int i = 0; i < size; ++i)
+    {
+        K nodeKey = path[i];
+        if (graph->contains(nodeKey))
+        {
+            nodesPath.pushLast(graph->getNode(nodeKey));
+        }
+    }
+    return nodesPath;
+}
+

@@ -1,0 +1,827 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+//#include "Vector.h"
+
+#include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846f
+#endif
+
+#include <iostream>
+using namespace std;
+
+
+
+//------------------------------------------------------------------------------
+template <class T>
+Vector2<T>::Vector2()
+    : x(0), y(0)
+{
+}
+
+template <class T>
+Vector2<T>::Vector2(T xx, T yy)
+    : x(xx), y(yy)
+{
+}
+
+template <class T>
+template <class U>
+Vector2<T>::Vector2(U xx, U yy)
+    : x(xx), y(yy)
+{
+}
+
+template <class T>
+template <class U>
+Vector2<T>::Vector2(const Vector2<U>& vec)
+    : x(vec.x), y(vec.y)
+{
+}
+
+template <class T>
+Vector2<T>::Vector2(const Vector2<T>& vec)
+    : x(vec.x), y(vec.y)
+{
+}
+
+template <class T>
+Vector2<T>& Vector2<T>::operator= (const Vector2<T>& vec)
+{
+    this->x=vec.x;
+    this->y=vec.y;
+    return *this;
+}
+
+template <class T>
+T& Vector2<T>::operator[](unsigned int index)
+{
+    switch(index)
+    {
+    case 0 :
+        return this->x;
+        break;
+    case 1 :
+        return this->y;
+        break;
+    default :
+        return this->x;
+        break;
+    }
+}
+
+template <class T>
+Vector2<T> normalize(const Vector2<T>& v)
+{
+    if (norm(v) != 0.0)
+        return v / norm(v);
+    return v;
+}
+
+template <class T>
+bool operator<(const Vector2<T>& vec1, const Vector2<T>& vec2)
+{
+    return (vec1.x < vec2.x) || ((vec1.x == vec2.x) && (vec1.y < vec2.y));
+}
+
+template <class T>
+bool operator<=(const Vector2<T>& vec1, const Vector2<T>& vec2)
+{
+    return (vec1.x < vec2.x) || ((vec1.x == vec2.x) && (vec1.y <= vec2.y));
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& o, const Vector2<T>& v )
+{
+    return o << v.x << " " << v.y << " ";
+}
+
+template <class T>
+Vector2<T> operator+(const Vector2<T>& v1, const Vector2<T>& v2)
+{
+    return Vector2<T>(v1.x + v2.x, v1.y + v2.y);
+}
+
+template <class T>
+Vector2<T> operator-(const Vector2<T>& v1, const Vector2<T>& v2)
+{
+    return Vector2<T>(v1.x - v2.x, v1.y - v2.y);
+}
+
+template <class T>
+Vector2<T> operator*(const Vector2<T>& v1, const T& a)
+{
+    return Vector2<T>(v1.x * a, v1.y * a);
+}
+
+template <class T>
+Vector2<T> operator*(const T& a, const Vector2<T>& v1)
+{
+    return Vector2<T>(v1.x * a, v1.y * a);
+}
+
+template <class T>
+Vector2<T> operator/(const Vector2<T>& v1, const T& a)
+{
+    return Vector2<T>(v1.x / a, v1.y / a);
+}
+
+template <class T>
+bool operator==(const Vector2<T>& v1, const Vector2<T>& v2)
+{
+    return ((v1.x == v2.x) && (v1.y == v2.y));
+}
+
+template <class T>
+float norm(const Vector2<T>& v)
+{
+    return sqrt(float(v.x*v.x + v.y*v.y));
+}
+
+template <class T>
+float dotProduct(const Vector2<T>& v1, const Vector2<T>& v2)
+{
+    return (v1.x*v2.x + v1.y*v2.y);
+}
+
+template <class T>
+float orientedAngle(const Vector2<T>& v1, const Vector2<T>& v2)
+{
+    Vector3F v11 = Vector3F(v1.x, 0.0, v1.y);
+    Vector3F v22 = Vector3F(v2.x, 0.0, v2.y);
+    float dot = dotProduct(v11, v22);
+    Vector3F cross = crossProduct(v11, v22);
+    float aacos = acosf(dot);
+    float ccross = dotProduct(cross, Vector3F(0, 1.0, 0.0));
+    if (ccross > 0.0)
+        return aacos;
+    else
+        return - aacos;
+
+}
+
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Static const defs
+template <class T>
+const Vector3<T> Vector3<T>::ZERO  = Vector3(0,0,0);
+template <class T>
+const Vector3<T> Vector3<T>::XAXIS = Vector3(1,0,0);
+template <class T>
+const Vector3<T> Vector3<T>::YAXIS = Vector3(0,1,0);
+template <class T>
+const Vector3<T> Vector3<T>::ZAXIS = Vector3(0,0,1);
+template <class T>
+const Vector3<T> Vector3<T>::UNIT  = Vector3(1,1,1);
+//------------------------------------------------------------------------------
+
+template <class T>
+const Vector4<T> Vector4<T>::ZERO  = Vector4(0,0,0,0);
+template <class T>
+const Vector4<T> Vector4<T>::UNIT  = Vector4(1,1,1,1);
+
+
+//------------------------------------------------------------------------------
+
+template <class T>
+Vector3<T>::Vector3()
+    : z(0)
+{
+}
+
+template <class T>
+Vector3<T>::Vector3(T xx, T yy, T zz)
+    : Vector2<T>(xx,yy), z(zz)
+{
+}
+
+template <class T>
+template <class U>
+Vector3<T>::Vector3(U xx, U yy, U zz)
+    : Vector2<T>(xx,yy), z(zz)
+{
+}
+
+template <class T>
+Vector3<T>::Vector3(const Vector3<T>& vec)
+    : Vector2<T>(vec.x,vec.y), z(vec.z)
+{
+}
+
+template <class T>
+Vector3<T>::Vector3(const Vector2<T>& vec)
+    : Vector2<T>(vec), z(0)
+{
+}
+
+template <class T>
+template <class U>
+Vector3<T>::Vector3(const Vector3<U>& vec)
+    : Vector2<T>(vec.x, vec.y), z(vec.z)
+{
+}
+
+template <class T>
+template <class U>
+Vector3<T>::Vector3(const Vector2<U>& vec)
+    : Vector2<T>(vec), z(0)
+{
+}
+
+template <class T>
+void Vector3<T>::display() const
+{
+    cout << "x : "<< this->x <<", y : "<< this->y <<", z : "<< this->z <<endl;
+}
+
+template <class T>
+float norm(const Vector3<T>& v)
+{
+    return sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
+}
+template <class T>
+Vector3<T> normalize(const Vector3<T>& v)
+{
+    return v / norm(v);
+}
+
+template <class T>
+Vector3<T> crossProduct(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    Vector3<T> res;
+    res.x = v1.y * v2.z - v1.z * v2.y;
+    res.y = v1.z * v2.x - v1.x * v2.z;
+    res.z = v1.x * v2.y - v1.y * v2.x;
+    return res;
+}
+
+template <class T>
+float dotProduct(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
+}
+
+
+template <class T>
+T& Vector3<T>::operator[](unsigned int index)
+{
+    switch(index)
+    {
+    case 0 :
+        return this->x;
+        break;
+    case 1 :
+        return this->y;
+        break;
+    case 2 :
+        return this->z;
+        break;
+    default :
+        return this->x;
+        break;
+    }
+}
+
+template <class T>
+T Vector3<T>::operator[](unsigned int index) const
+{
+    switch(index)
+    {
+    case 0 :
+        return this->x;
+        break;
+    case 1 :
+        return this->y;
+        break;
+    case 2 :
+        return this->z;
+        break;
+    default :
+        return this->x;
+        break;
+    }
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator= (const Vector3<T>& vec)
+{
+    this->x=vec.x;
+    this->y=vec.y;
+    this->z=vec.z;
+    return *this;
+}
+
+template <class T>
+Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    Vector3<T> res(v1);
+    res+=v2;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    Vector3<T> res(v1);
+    res-=v2;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator- (const T& a, const Vector3<T>& v1)
+{
+    Vector3<T> res(v1);
+    res.x-=a;
+    res.y-=a;
+    res.z-=a;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator- (const Vector3<T>& v1, const T& a)
+{
+    Vector3<T> res(v1);
+    res.x-=a;
+    res.y-=a;
+    res.z-=a;
+    return res;
+}
+
+
+template <class T>
+Vector3<T> operator+ (const T& a, const Vector3<T>& v1)
+{
+    Vector3<T> res(v1);
+    res.x+=a;
+    res.y+=a;
+    res.z+=a;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator+ (const Vector3<T>& v1, const T& a)
+{
+    Vector3<T> res(v1);
+    res.x+=a;
+    res.y+=a;
+    res.z+=a;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator- (const Vector3<T>& v1)
+{
+    Vector3<T> res(0,0,0);
+    res-=v1;
+    return res;
+}
+
+template <class T>
+Vector3<T> operator+ (const Vector3<T>& v1)
+{
+    Vector3<T> res(0,0,0);
+    res+=v1;
+    return res;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator+= (const Vector3<T>& v2)
+{
+    this->x = this->x + v2.x;
+    this->y = this->y + v2.y;
+    this->z = this->z + v2.z;
+    return *this;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator+= (const T& a)
+{
+    this->x += a;
+    this->y += a;
+    this->z += a;
+    return *this;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator-= (const Vector3<T>& v2)
+{
+    this->x = this->x - v2.x;
+    this->y = this->y - v2.y;
+    this->z = this->z - v2.z;
+    return *this;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator-= (const T& a)
+{
+    this->x -= a;
+    this->y -= a;
+    this->z -= a;
+    return *this;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator/= (const T& a)
+{
+    this->x /= a;
+    this->y /= a;
+    this->z /= a;
+    return *this;
+}
+
+template <class T>
+Vector3<T> operator*(const Vector3<T>& v1, const T& coeff)
+{
+    Vector3<T> res(v1);
+    res.x*=coeff;
+    res.y*=coeff;
+    res.z*=coeff;
+    return res;
+}
+
+template <class T>
+Vector3<T>& Vector3<T>::operator*= (const T& a)
+{
+    this->x *= a;
+    this->y *= a;
+    this->z *= a;
+    return *this;
+}
+
+
+template <class T>
+Vector3<T> operator/(const Vector3<T>& v1, const T& coeff)
+{
+    Vector3<T> res(v1);
+    res.x/=coeff;
+    res.y/=coeff;
+    res.z/=coeff;
+    return res;
+}
+
+
+template <class T>
+Vector3<T> operator*(const T& coeff, const Vector3<T>& v1)
+{
+    return v1*coeff;
+}
+
+template <class T>
+Vector3<T> rotationAroundAVector(const Vector3<T>& U, const Vector3<T>& N, float angle)
+{
+    Vector3<T> res;
+    res = U*cosf(angle)+(1-cosf(angle))*(dotProduct(U,N))*N+sinf(angle)*crossProduct(N,U);
+    return res;
+}
+
+
+template <class T>
+void Vector3<T>::rotationAroundAxisX(float angleRad)
+{
+    // x = x;
+    float y2, z2;
+    y2 = this->y * cosf(angleRad) - this->z * sinf(angleRad);
+    z2 = this->y * sinf(angleRad) + this->z * cosf(angleRad);
+    this->y = y2;
+    this->z = z2;
+}
+
+template <class T>
+void Vector3<T>::rotationAroundAxisY(float angleRad)
+{
+    float x2, z2;
+    x2 = this->x * cosf(angleRad) - this->z * sinf(angleRad);
+    z2 = this->x * sinf(angleRad) + this->z * cosf(angleRad);
+    this->x = x2;
+    this->z = z2;
+}
+
+template <class T>
+void Vector3<T>::rotationAroundAxisZ(float angleRad)
+{
+    float x2, y2;
+    x2 = this->x * cosf(angleRad) - this->y * sinf(angleRad);
+    y2 = this->x * sinf(angleRad) + this->y * cosf(angleRad);
+    this->x = x2;
+    this->y = y2;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& o, const Vector3<T>& v1 )
+{
+    return o << v1.x << " " << v1.y << " " << v1.z;
+}
+
+template <class T>
+bool       operator==(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    return ( v1.x == v2.x && v1.y == v2.y && v1.z == v2.z );
+}
+
+template <class T>
+bool       operator!=(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+    return !(v1 == v2);
+}
+
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+template <class T>
+Vector4<T>::Vector4()
+    : w(0)
+{
+}
+
+template <class T>
+Vector4<T>::Vector4(T xx, T yy, T zz, T ww)
+    : Vector3<T>(xx,yy,zz), w(ww)
+{
+}
+
+template <class T>
+template <class U>
+Vector4<T>::Vector4(U xx, U yy, U zz, U ww)
+    : Vector3<T>(xx,yy,zz), w(ww)
+{
+}
+
+template <class T>
+Vector4<T>::Vector4(const Vector4<T>& vec)
+    : Vector3<T>(vec.x,vec.y,vec.z), w(vec.w)
+{
+}
+
+template <class T>
+template <class U>
+Vector4<T>::Vector4(const Vector4<U>& vec)
+    : Vector3<T>(vec.x,vec.y,vec.z), w(vec.w)
+{
+}
+
+
+template <class T>
+void Vector4<T>::display() const
+{
+    cout << "x : "<< this->x <<", y : "<< this->y <<", z : "<< this->z <<", w : "<< this->w <<endl;
+}
+
+template <class T>
+void Vector4<T>::normalize()
+{
+    float norm = sqrt(this->x*this->x + this->y*this->y + this->z*this->z + this->w*this->w);
+    this->x = this->x/norm;
+    this->y = this->y/norm;
+    this->z = this->z/norm;
+    this->w = this->w/norm;
+}
+
+template <class T>
+float norm(Vector4<T>& v)
+{
+    return sqrt(v.x*v.x + v.y*v.y + v.z*v.z + v.w*v.w);
+}
+
+template <class T>
+float dotProduct(const Vector4<T>& v1, const Vector4<T>& v2)
+{
+    return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z + v1.w*v2.w;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator= (const Vector4<T>& vec)
+{
+    this->x=vec.x;
+    this->y=vec.y;
+    this->z=vec.z;
+    this->w=vec.w;
+    return *this;
+}
+
+template <class T>
+Vector4<T> operator+ (const Vector4<T>& v1, const Vector4<T>& v2)
+{
+    Vector4<T> res(v1);
+    res+=v2;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator- (const Vector4<T>& v1, const Vector4<T>& v2)
+{
+    Vector4<T> res(v1);
+    res-=v2;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator- (const Vector4<T>& v1, const T& a)
+{
+    Vector4<T> res(v1);
+    res.x-=a;
+    res.y-=a;
+    res.z-=a;
+    res.w-=a;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator- (const T& a, const Vector4<T>& v1)
+{
+    Vector4<T> res(v1);
+    res.x-=a;
+    res.y-=a;
+    res.z-=a;
+    res.w-=a;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator+ (const Vector4<T>& v1, const T& a)
+{
+    Vector4<T> res(v1);
+    res.x+=a;
+    res.y+=a;
+    res.z+=a;
+    res.w+=a;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator+ (const T& a, const Vector4<T>& v1)
+{
+    Vector4<T> res(v1);
+    res.x+=a;
+    res.y+=a;
+    res.z+=a;
+    res.w+=a;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator- (const Vector4<T>& v1)
+{
+    Vector4<T> res(0,0,0,0);
+    res-=v1;
+    return res;
+}
+
+template <class T>
+Vector4<T> operator+ (const Vector4<T>& v1)
+{
+    Vector4<T> res(0,0,0,0);
+    res+=v1;
+    return res;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator+= (const Vector4<T>& v2)
+{
+    this->x = this->x + v2.x;
+    this->y = this->y + v2.y;
+    this->z = this->z + v2.z;
+    this->w = this->w + v2.w;
+    return *this;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator+= (const T& a)
+{
+    this->x += a;
+    this->y += a;
+    this->z += a;
+    this->w += a;
+    return *this;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator-= (const Vector4<T>& v2)
+{
+    this->x = this->x - v2.x;
+    this->y = this->y - v2.y;
+    this->z = this->z - v2.z;
+    this->w = this->w - v2.w;
+    return *this;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator-= (const T& a)
+{
+    this->x -= a;
+    this->y -= a;
+    this->z -= a;
+    this->w -= a;
+    return *this;
+}
+
+template <class T>
+Vector4<T> operator*(const Vector4<T>& v1, const T& coeff)
+{
+    Vector4<T> res(v1);
+    res.x*=coeff;
+    res.y*=coeff;
+    res.z*=coeff;
+    res.w*=coeff;
+    return res;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator*= (const T& a)
+{
+    this->x *= a;
+    this->y *= a;
+    this->z *= a;
+    this->w *= a;
+    return *this;
+}
+
+
+template <class T>
+Vector4<T> operator/(const Vector4<T>& v1, const T& coeff)
+{
+    Vector4<T> res(v1);
+    res.x/=coeff;
+    res.y/=coeff;
+    res.z/=coeff;
+    res.w/=coeff;
+    return res;
+}
+
+template <class T>
+Vector4<T>& Vector4<T>::operator/= (const T& a)
+{
+    this->x /= a;
+    this->y /= a;
+    this->z /= a;
+    this->w /= a;
+    return *this;
+}
+
+template <class T>
+Vector4<T> operator*(const T& coeff, const Vector4<T>& v1)
+{
+    return v1*coeff;
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& o, const Vector4<T>& v1 )
+{
+    return o << v1.x << " " << v1.y << " " << v1.z << " " << v1.w;
+}
+
+template <class T>
+T& Vector4<T>::operator[](unsigned int index)
+{
+    switch(index)
+    {
+    case 0 :
+        return this->x;
+        break;
+    case 1 :
+        return this->y;
+        break;
+    case 2 :
+        return this->z;
+        break;
+    case 3 :
+        return this->w;
+        break;
+    default :
+        return this->x;
+        break;
+    }
+}
+
+template <class T>
+T Vector4<T>::operator[](unsigned int index) const
+{
+    switch(index)
+    {
+    case 0 :
+        return this->x;
+        break;
+    case 1 :
+        return this->y;
+        break;
+    case 2 :
+        return this->z;
+        break;
+    case 3 :
+        return this->w;
+        break;
+    default :
+        return this->x;
+        break;
+    }
+}
+
+//------------------------------------------------------------------------------
+
+

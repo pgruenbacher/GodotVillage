@@ -1,0 +1,124 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "Graph.h"
+
+template <class C, class K, class V>
+Graph<C,K,V>::Graph()
+{
+}
+
+template <class C, class K, class V>
+Graph<C,K,V>::~Graph()
+{
+}
+
+template <class C, class K, class V>
+void Graph<C,K,V>::addNode(const K& nodeKey, const V& nodeValue)
+{
+	// Check	
+	if(_nodes.contains(nodeKey))
+		return;
+
+	// Insert
+	_nodes.insert(nodeKey, GraphNode<C,K,V>(nodeKey, nodeValue));
+}
+
+template <class C, class K, class V>
+bool Graph<C,K,V>::contains(const K& nodeKey)
+{
+	// Check
+	if (_nodes.contains(nodeKey))
+	{
+		return true;
+	}
+	return false;
+}
+
+template <class C, class K, class V>
+bool Graph<C,K,V>::hasArcs(const K& nodeKey)
+{
+	// Check
+	if (_arcs.contains(nodeKey))
+	{
+		return true;
+	}
+	return false;
+}
+
+
+template <class C, class K, class V>
+LinkedList< GraphArc<C,K,V>* >& Graph<C,K,V>::getArcsFromNode(const K& nodeKey)
+{
+	return _arcs.find(nodeKey).getValue();
+}
+
+template <class C, class K, class V>
+HashTable<K, GraphNode<C,K,V> >& Graph<C,K,V>::getNodes() 
+{
+        return _nodes;
+}
+
+template <class C, class K, class V>
+GraphNode<C,K,V>& Graph<C,K,V>::getNode(const K& nodeKey) 
+{
+        return _nodes.find(nodeKey).getValue();
+}
+
+template <class C, class K, class V>
+void Graph<C,K,V>::addArc(const K& sourceNodeKey, 
+			  const K& destNodeKey, 
+			  const C& initCost)
+{
+	// Check
+	if (! _arcs.contains(sourceNodeKey))
+	{    
+	        _arcs.insert(sourceNodeKey, LinkedList< GraphArc<C,K,V>* > ());
+	}
+
+	
+	// Insert the Graph
+	_arcs[sourceNodeKey].pushLast(new GraphArc<C,K,V>(sourceNodeKey,
+						               destNodeKey,
+						               initCost));
+}
+
+template <class C, class K, class V>
+void Graph<C,K,V>::addTwoArcs(const K& nodeKey1, 
+			      const K& nodeKey2,
+			      const C& initCostNode1toNode2,
+			      const C& initCostNode2toNode1)
+{
+	addArc(nodeKey1, nodeKey2, initCostNode1toNode2);
+	addArc(nodeKey2, nodeKey1, initCostNode2toNode1);
+}
+
+template <class C, class K, class V>
+void Graph<C,K,V>::detail()
+{
+	std::cout << "Nodes :" << std::endl;
+	typename HashTable<K, GraphNode<C,K,V> >::HashTableIterator itN(&_nodes);
+	while(itN.hasNext())
+	{
+	       itN.next();
+	       Pair<K, GraphNode<C,K,V> > node = itN.value();	        
+               std::cout << " Key, Value : " << node << std::endl;
+	}
+
+	std::cout <<"Arcs :" << std::endl;
+	typename HashTable<K, LinkedList< GraphArc<C,K,V>* > >::HashTableIterator itA(&_arcs);
+	while(itA.hasNext())
+	{
+	        itA.next() ;
+	        LinkedList< GraphArc<C,K,V>* >& current = itA.value().getValue();
+	        typename LinkedList< GraphArc<C,K,V>* >::LinkedListIterator itB(& current);
+	        while(itB.hasNext())
+		{
+		        itB.next();
+			std::cout << "  " << itB.value() << std::endl;
+		}
+	}
+}

@@ -1,0 +1,248 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "TransformationMatrix.h"
+#include <math.h>
+
+#define PI 3.14159265
+
+template <class T>
+TransformationMatrix<T>::TransformationMatrix()
+    : Matrix<T,4,4>()
+{
+    Matrix<T,4,4>::_array[0]  = T(1);
+    Matrix<T,4,4>::_array[1]  = T(0);
+    Matrix<T,4,4>::_array[2]  = T(0);
+    Matrix<T,4,4>::_array[3]  = T(0);
+    Matrix<T,4,4>::_array[4]  = T(0);
+    Matrix<T,4,4>::_array[5]  = T(1);
+    Matrix<T,4,4>::_array[6]  = T(0);
+    Matrix<T,4,4>::_array[7]  = T(0);
+    Matrix<T,4,4>::_array[8]  = T(0);
+    Matrix<T,4,4>::_array[9]  = T(0);
+    Matrix<T,4,4>::_array[10] = T(1);
+    Matrix<T,4,4>::_array[11] = T(0);
+    Matrix<T,4,4>::_array[12] = T(0);
+    Matrix<T,4,4>::_array[13] = T(0);
+    Matrix<T,4,4>::_array[14] = T(0);
+    Matrix<T,4,4>::_array[15] = T(1);
+}
+
+template <class T>
+TransformationMatrix<T>::TransformationMatrix(const Matrix<T,4u,4u>& matrix)
+    : Matrix<T,4u,4u>(matrix)
+{
+}
+
+template <class T>
+TransformationMatrix<T>::TransformationMatrix(const T& m11, const T& m12, const T& m13, const T& m14,
+        const T& m21, const T& m22, const T& m23, const T& m24,
+        const T& m31, const T& m32, const T& m33, const T& m34,
+        const T& m41, const T& m42, const T& m43, const T& m44)
+    : Matrix<T,4,4>()
+{
+    Matrix<T,4,4>::_array[0]  = m11;
+    Matrix<T,4,4>::_array[1]  = m12;
+    Matrix<T,4,4>::_array[2]  = m13;
+    Matrix<T,4,4>::_array[3]  = m14;
+    Matrix<T,4,4>::_array[4]  = m21;
+    Matrix<T,4,4>::_array[5]  = m22;
+    Matrix<T,4,4>::_array[6]  = m23;
+    Matrix<T,4,4>::_array[7]  = m24;
+    Matrix<T,4,4>::_array[8]  = m31;
+    Matrix<T,4,4>::_array[9]  = m32;
+    Matrix<T,4,4>::_array[10] = m33;
+    Matrix<T,4,4>::_array[11] = m34;
+    Matrix<T,4,4>::_array[12] = m41;
+    Matrix<T,4,4>::_array[13] = m42;
+    Matrix<T,4,4>::_array[14] = m43;
+    Matrix<T,4,4>::_array[15] = m44;
+}
+
+
+template <class T>
+TransformationMatrix<T> TransformationMatrix<T>::translation(const Vector3<T>& translation)
+{
+    return TransformationMatrix<T>( T(1), T(0), T(0), T(translation.x),
+                                    T(0), T(1), T(0), T(translation.y),
+                                    T(0), T(0), T(1), T(translation.z),
+                                    T(0), T(0), T(0), T(1) );
+}
+
+template<class T>
+TransformationMatrix<T> TransformationMatrix<T>::rotationAroundX(const T& angleI)
+{
+    T angle = angleI;
+    return TransformationMatrix<T>( T(1), T(0),           T(0),           T(0),
+                                    T(0), T(cos(angle)),  T(-sin(angle)), T(0),
+                                    T(0), T(sin(angle)),  T(cos(angle)),  T(0),
+                                    T(0), T(0),           T(0),           T(1) );
+}
+
+template<class T>
+TransformationMatrix<T> TransformationMatrix<T>::rotationAroundY(const T& angleI)
+{
+    T angle = angleI;
+    return TransformationMatrix<T>( T(cos(angle)),  T(0),  T(sin(angle)),  T(0),
+                                    T(0),           T(1),  T(0),           T(0),
+                                    T(-sin(angle)), T(0),  T(cos(angle)),  T(0),
+                                    T(0),           T(0),  T(0),           T(1) );
+}
+
+template<class T>
+TransformationMatrix<T> TransformationMatrix<T>::rotationAroundZ(const T& angleI)
+{
+    T angle = angleI;
+    return TransformationMatrix<T>( T(cos(angle)),  T(-sin(angle)), T(0), T(0),
+                                    T(sin(angle)),  T(cos(angle)),  T(0), T(0),
+                                    T(0),           T(0),           T(1), T(0),
+                                    T(0),           T(0),           T(0), T(1) );
+}
+
+template<class T>
+TransformationMatrix<T> TransformationMatrix<T>::rotation(const Quaternion& quat)
+{
+    T w     = quat.angle;
+    T x     = quat.vector.x;
+    T y     = quat.vector.y;
+    T z     = quat.vector.z;
+    return TransformationMatrix<T>( T(1)-T(2)*y*y-T(2)*z*z, T(2)*x*y-T(2)*z*w,      T(2)*x*z+T(2)*y*w,      T(0),
+                                    T(2)*x*y+T(2)*z*w,      T(1)-T(2)*x*x-T(2)*z*z, T(2)*y*z-T(2)*x*w,      T(0),
+                                    T(2)*x*z-T(2)*y*w,      T(2)*y*z+T(2)*x*w,      T(1)-T(2)*x*x-T(2)*y*y, T(0),
+                                    T(0),                   T(0),                   T(0),                   T(1) );
+}
+
+template<class T>
+TransformationMatrix<T> TransformationMatrix<T>::scaling(const Vector3<T>& scale)
+{
+    return TransformationMatrix<T>( T(scale.x), T(0),       T(0),       T(0),
+                                    T(0),       T(scale.y), T(0),       T(0),
+                                    T(0),       T(0),       T(scale.z), T(0),
+                                    T(0),       T(0),       T(0),       T(1) );
+}
+
+template <class T>
+TransformationMatrix<T>& TransformationMatrix<T>::operator=(const Matrix<T,4u,4u>& matrix)
+{
+    for(unsigned int i = 0; i < 16; ++i)
+    {
+        Matrix<T,4,4>::_array[i] = matrix[i];
+    }
+    return *this;
+}
+
+template <class T>
+TransformationMatrix<T> TransformationMatrix<T>::projection(T near,
+        T far,
+        T fov,
+        T aspect)
+{
+    float width  = 2 * near * tan(fov / 2.f * PI / 180.f);
+    float height = width / aspect;
+    return TransformationMatrix<T>( T(2)*T(near)/T(width), T(0), T(0), T(0),
+                                    T(0), T(2)*T(near)/T(height), T(0), T(0),
+                                    T(0), T(0), T(-1)*T(far+near)/T(far-near), T(-2)*T(far)*T(near)/T(far-near),
+                                    T(0), T(0), T(-1), T(0) );
+}
+
+template <class T>
+TransformationMatrix<T> TransformationMatrix<T>::ortho(T near,
+        T far,
+        T fov,
+        T aspect)
+{
+    float width  = near * tan(fov * M_PI / 360.f);
+    float height = width / aspect;
+    return TransformationMatrix<T>( T(2)/T(width), T(0), T(0), T(0),
+                                    T(0), T(2)/T(height), T(0), T(0),
+                                    T(0), T(0), T(-2)/T(far-near), -T(far+near)/T(far-near),
+                                    T(0), T(0), T(0), T(1) );
+}
+
+template <class T>
+Matrix<T, 3, 3> TransformationMatrix<T>::normal(const TransformationMatrix<T>& modelViewMatrix)
+{
+    Matrix<T, 3, 3> result;
+    TransformationMatrix<T> temp = transpose ( invert (modelViewMatrix));
+    for(unsigned int i = 0; i < 3; ++i)
+    {
+        for(unsigned int j = 0; j < 3; ++j)
+        {
+            result.get(i,j) = temp.get(i,j);
+        }
+    }
+    return result;
+}
+
+template <class T>
+Vector4<T> TransformationMatrix<T>::operator*(const Vector4<T>& vector)
+{
+    return Vector4<T>( Matrix<T,4,4>::_array[0]*vector[0]
+                       + Matrix<T,4,4>::_array[1]*vector[1]
+                       + Matrix<T,4,4>::_array[2]*vector[2]
+                       + Matrix<T,4,4>::_array[3]*vector[3],
+
+                       Matrix<T,4,4>::_array[4]*vector[0]
+                       + Matrix<T,4,4>::_array[5]*vector[1]
+                       + Matrix<T,4,4>::_array[6]*vector[2]
+                       + Matrix<T,4,4>::_array[7]*vector[3],
+
+                       Matrix<T,4,4>::_array[8]*vector[0]
+                       + Matrix<T,4,4>::_array[9]*vector[1]
+                       + Matrix<T,4,4>::_array[10]*vector[2]
+                       + Matrix<T,4,4>::_array[11]*vector[3],
+
+                       Matrix<T,4,4>::_array[12]*vector[0]
+                       + Matrix<T,4,4>::_array[13]*vector[1]
+                       + Matrix<T,4,4>::_array[14]*vector[2]
+                       + Matrix<T,4,4>::_array[15]*vector[3] );
+}
+
+
+
+template <class T>
+Vector3<T> TransformationMatrix<T>::operator*(const Vector3<T>& vector)
+{
+    return Vector3<T>( Matrix<T,4,4>::_array[0]*vector[0]
+                       + Matrix<T,4,4>::_array[1]*vector[1]
+                       + Matrix<T,4,4>::_array[2]*vector[2]
+                       + Matrix<T,4,4>::_array[3],
+
+                       Matrix<T,4,4>::_array[4]*vector[0]
+                       + Matrix<T,4,4>::_array[5]*vector[1]
+                       + Matrix<T,4,4>::_array[6]*vector[2]
+                       + Matrix<T,4,4>::_array[7],
+
+                       Matrix<T,4,4>::_array[8]*vector[0]
+                       + Matrix<T,4,4>::_array[9]*vector[1]
+                       + Matrix<T,4,4>::_array[10]*vector[2]
+                       + Matrix<T,4,4>::_array[11] );
+}
+
+template <class T>
+TransformationMatrix<T> TransformationMatrix<T>::extractRotation(const TransformationMatrix<T> &m)
+{
+    TransformationMatrix<T> mr = m;
+    mr.Matrix<T,4,4>::_array[3] = 0;
+    mr.Matrix<T,4,4>::_array[7] = 0;
+    mr.Matrix<T,4,4>::_array[11] = 0;
+    mr.Matrix<T,4,4>::_array[12] = 0;
+    mr.Matrix<T,4,4>::_array[13] = 0;
+    mr.Matrix<T,4,4>::_array[14] = 0;
+    return mr;
+}
+
+template <class T>
+TransformationMatrix<T> extractTranslation(const TransformationMatrix<T> &m)
+{
+    TransformationMatrix<T> mr;
+    mr.Matrix<T,4,4>::_array[3] = m.Matrix<T,4,4>::_array[3];
+    mr.Matrix<T,4,4>::_array[7] = m.Matrix<T,4,4>::_array[7];
+    mr.Matrix<T,4,4>::_array[11] = m.Matrix<T,4,4>::_array[11];
+    mr.Matrix<T,4,4>::_array[12] = m.Matrix<T,4,4>::_array[15];
+    return mr;
+}
+

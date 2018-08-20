@@ -1,0 +1,466 @@
+/*******************************************************************************
+ *
+ *     Copyright : 2010 Arnaud Emilien
+ *
+ *******************************************************************************/
+
+#include "LinkedList.h"
+#include <iostream>
+
+
+	template <class T>
+	LinkedList<T>::LinkedList()
+		: _size(0),
+		  _first(NULL),
+		  _last(NULL)
+	{
+	}
+
+	template <class T>
+	LinkedList<T>::LinkedList(const LinkedList& list)
+		: _size(0),
+		  _first(NULL),
+		  _last(NULL)
+	{	
+	        if (&list == this)
+	                return;
+	                
+		Link* current = list._first;
+		Link* next = NULL;
+		while(current != NULL)
+		{
+			insert(current->getValue());
+			next = current->getNext();
+			current = next;
+		}
+	}
+
+	template <class T>
+	template <class U>
+	LinkedList<T>::LinkedList(const LinkedList<U>& list)
+		: _size(0),
+		  _first(NULL),
+		  _last(NULL)
+	{	
+	        if (&list == (LinkedList<U>*)this)
+	                return;
+	                
+		typename LinkedList<U>::Link* current = list._first;
+		typename LinkedList<U>::Link* next = NULL;
+		while(current != NULL)
+		{
+			insert(current->getValue());
+			next = current->getNext();
+			current = next;
+		}
+	}
+
+	template <class T>
+	LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& list)
+	{	
+	        if (&list == this)
+	                return *this;
+	                
+		empty();
+		Link* current = list._first;
+		Link* next = NULL;
+		while(current != NULL)
+		{
+			insert(current->getValue());
+			next = current->getNext();
+			current = next;
+		}		
+		return *this;
+	}
+	
+
+	template <class T>
+	LinkedList<T>::~LinkedList()
+	{
+		empty();
+		_first = NULL;
+		_last  = NULL;
+		_size  = 0;
+	}
+
+	template <class T>
+	unsigned int LinkedList<T>::getSize() const
+	{
+		return _size;
+	}
+
+	template <class T>
+	LinkedList<T>& merge(LinkedList<T>& list1,
+					    LinkedList<T>& list2)
+	{
+		if(list2.getSize() == 0)
+		{
+			// The second list is empty, just copy the first list.
+			return list1;
+		}
+		else if(list1.getSize() == 0)
+		{
+			// The first list is empty, just copy the second list.
+			return list2;
+		}
+		
+		list1._size+=list2.getSize();
+		list1._last->setNext(list2.getFirst());
+		list2.getFirst()->setPrev(list1._last);
+		list1._last=list2.getLast();
+	}
+
+	template <class T>
+	void LinkedList<T>::pushLast(LinkedList<T>& list)
+	{		
+		if(list.getSize() == 0)
+		{
+			return;
+		}
+
+		LinkedList<T>::LinkedListIterator it(&list);
+		while(it.hasNext())
+		{
+			it.next();
+			pushLast(it.value());
+		}
+	}
+
+	/*
+	template <class T>
+	void LinkedList<T>::sortedMerge(LinkedList& list)
+	{
+		if (_size == 0)
+		{
+			_size = list.getSize();
+			_first = list.getFirst();
+			_last = list.getLast();
+			return;
+		}
+		if (list.getSize() == 0)
+			return;
+		
+		Link* current = _first;
+		Link* current2 = list.getFirst();
+		
+		while(current2 != NULL)
+		{
+			if(current->getValue() > current2->getValue())
+			{
+				if(current == _first)
+				{
+					_first = current2;
+					_first->setNext(current);
+					current->setPrev(_first);
+					current2 = current2->getNext();
+				}
+				else
+				{
+					current2->setPrev(current->getPrev());
+					current->getPrev()->setNext(current2);
+					current2 = current2->getNext();	
+				}
+			}
+			else
+			{
+				if(current == _last)
+				{
+					current->setNext(current2);
+					current2->setPrev(current);
+					_last = list.getLast();
+				}
+				else
+				{
+					current = current->getNext();
+				}
+			}
+		}		
+		_size+=list.getSize();
+	}
+	*/
+
+	template <class T>
+	void LinkedList<T>::fastInsert(const T& element)
+	{
+		pushLast(element);
+	}
+
+	template <class T>
+	void LinkedList<T>::sortedInsert(const T& element)
+	{
+		// Empty List
+		if( _size == 0)
+		{
+			pushFirst(element);
+			return;
+		}
+	       
+		// Element smaller than the first node
+		if(element <= _first->getValue())
+		{
+			pushFirst(element);
+			return;
+		}
+		
+		// 
+		Link* current = _first;
+		while(current != NULL)
+		{
+			if(element <= current->getValue())
+			{
+				Link* newEl = new Link(element);
+				newEl->_prev = current->getPrev();
+				current->getPrev()->_next = newEl;
+				newEl->_next = current;
+				current->_prev=newEl;
+				++_size;
+				return;
+			}
+			current = current->getNext();				
+		}
+		
+		// The element is greater than others
+		// Insert it in the back
+		pushLast(element);
+	}
+	
+
+	template <class T>
+	void LinkedList<T>::insert(const T& element)
+	{
+		pushLast(element);
+	}
+
+	template <class T>
+	void LinkedList<T>::pushFirst(const T& element)
+	{
+		Link* newLink = new Link(element);
+		if( _size == 0)
+		{
+			_first = newLink;
+			_last = newLink;
+			++_size;
+		}
+		else
+		{
+			newLink->_next = _first;
+			_first->_prev  = newLink;
+			_first = newLink;
+			++_size;
+		}
+	}
+
+	template <class T>
+	void LinkedList<T>::pushLast(const T& element)
+	{
+		Link* newLink = new Link(element);
+		if( _size == 0)
+		{
+			_first = newLink;
+			_last = newLink;
+			++_size;
+		}
+		else
+		{
+			_last->_next   = newLink;
+			newLink->_prev = _last;
+			_last = newLink;
+			++_size;
+		}
+	}
+		
+	template <class T>
+	bool LinkedList<T>::contains(const T& element)
+	{
+		Link* current = _first;
+		while(current != NULL)
+		{
+			if(current->getValue() == element)
+			{
+				return true;
+			}
+			current = current->getNext();
+		}
+		return false;
+	}
+		
+	template <class T>
+	void LinkedList<T>::remove(const T& element)
+	{
+		Link* current = _first;
+		while(current != NULL)
+		{
+			if(current->getValue() == element)
+			{
+				if(_size == 1)
+				{
+					_first = NULL;
+					_last  = NULL;
+					_size  = 0;
+					delete current;
+				}
+				else if(current->getPrev() == NULL)
+				{
+					current->getNext()->_prev = NULL;
+					_first = current->getNext();
+					--_size;		
+					delete current;
+				}
+				else if(current->getNext() == NULL)
+				{
+					current->getPrev()->_next = NULL;
+					_last = current->getPrev();
+					--_size;
+					delete current;
+				}
+				else
+				{
+					current->getPrev()->_next = current->getNext();
+					current->getNext()->_prev = current->getPrev();
+					--_size;
+					delete current;
+				}
+				return;
+			}
+			current = current->getNext();
+		}
+	}
+
+	template <class T>
+	void LinkedList<T>::removeAt(LinkedListIterator& it)
+	{
+		Link* current = it.getCurrent();
+		if(it.hasPrev())
+		{
+			it.prev();
+		}
+
+		if(current != NULL)
+		{
+			if(_size == 1)
+			{
+				_first = NULL;
+				_last  = NULL;
+				_size  = 0;
+				delete current;
+			}
+			else if(current->getPrev() == NULL)
+			{
+				current->getNext()->_prev = NULL;
+				_first = current->getNext();
+				--_size;		
+				delete current;
+			}
+			else if(current->getNext() == NULL)
+			{
+				current->getPrev()->_next = NULL;
+				_last = current->getPrev();
+				--_size;
+				delete current;
+			}
+			else
+			{
+				current->getPrev()->_next = current->getNext();
+				current->getNext()->_prev = current->getPrev();
+				--_size;
+				delete current;
+			}
+			return;
+		}
+	}
+
+	template <class T>
+	T LinkedList<T>::getFirst() const
+	{
+		return _first->getValue();
+	}
+
+	template <class T>
+	T LinkedList<T>::getLast() const
+	{
+		return _last->getValue();
+	}
+	
+	
+	template <class T>
+	T LinkedList<T>::popFirst()
+	{
+		T result = _first->getValue();
+		--_size;
+		if(_size == 0)
+		{
+			delete _first;
+			_first = NULL;
+			_last  = NULL;
+			_size  = 0;
+		}
+		else
+		{
+			Link* next = _first->getNext();
+			delete _first;
+			next->_prev = NULL;
+			_first = next;
+			if(_size == 1)
+			{
+				_last = _first;
+			}
+		}
+		return result;
+	}
+	
+	template <class T>
+	T LinkedList<T>::popLast()
+	{
+		T result = _last->getValue();
+		--_size;
+		if(_size == 0)
+		{
+			delete _first;
+			_first = NULL;
+			_last  = NULL;
+			_size  = 0;
+		}
+		else
+		{
+			Link* last = _last->getPrev();
+			delete _last;
+			last->_next = NULL;
+			_last = last;
+			if(_size == 1)
+			{
+				_first = _last;
+			}
+		}
+		return result;
+	}
+
+	template <class T>
+	void LinkedList<T>::empty()
+	{
+		Link* current = _first;
+		Link* next = NULL;
+		while(current != NULL)
+		{
+			next = current->getNext();
+			delete current;
+			current = next;
+		}
+		_first = NULL;
+		_last  = NULL;
+		_size  = 0;
+	}
+
+	template <class T>
+	void LinkedList<T>::detail()
+	{
+		Link* current = _first;
+		Link* next = NULL;
+		while(current != NULL)
+		{
+			next = current->getNext();
+			std::cout << current->getValue() << std::endl;
+			current = next;
+		}
+	}
+	
+
