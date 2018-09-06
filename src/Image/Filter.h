@@ -9,10 +9,10 @@
 
 #include <QImage>
 
-class Filter{
+class Filter {
 
-public :
-        virtual QImage operator()(const QImage& image) = 0;
+public:
+	virtual QImage operator()(const QImage &image) = 0;
 
 }; // class Filter
 

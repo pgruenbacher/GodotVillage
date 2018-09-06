@@ -10,21 +10,19 @@
 #include <iostream>
 
 template <class C, class K, class V>
-class Layout{
-private :
+class Layout {
+private:
 	unsigned int _width;
 	unsigned int _height;
 
-public :
-	Layout(unsigned int width, 
-	       unsigned int height)
-	: _width(width)
-	, _height(height)
-	{
-	}	
-	
+public:
+	Layout(unsigned int width,
+			unsigned int height)
+			: _width(width), _height(height) {
+	}
+
 	virtual C getValueAt(K key) = 0;
-        
+
 }; // class Layout
 
 #endif // _LAYOUT_H

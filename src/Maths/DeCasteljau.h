@@ -10,13 +10,10 @@
 #include "../Utils/LinkedList.h"
 #include "Vector.h"
 
-class DeCasteljau
-{
-public :
-    static Vector2F evaluate(LinkedList<Vector2F> controlPoints, float t);
-    static LinkedList<Vector2F> bezierCurve(LinkedList<Vector2F> controlPoints, float step);
+class DeCasteljau {
+public:
+	static Vector2F evaluate(LinkedList<Vector2F> controlPoints, float t);
+	static LinkedList<Vector2F> bezierCurve(LinkedList<Vector2F> controlPoints, float step);
 }; // class DeCasteljau
-
-
 
 #endif // DE_CASTELJAU_H
