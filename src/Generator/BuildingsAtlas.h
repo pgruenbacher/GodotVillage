@@ -9,6 +9,7 @@
 
 #include "../Utils/Table.h"
 #include "Building.h"
+#include <map>
 
 class BuildingsAtlas {
 public:
@@ -53,54 +54,82 @@ public:
 private:
 	Table<Table<float> > _parameters;
 
+	static const map<std::string, Building::Type> typeMap;
+
+  static map<std::string,Building::Type> create_type_map() {
+    map<std::string,Building::Type> m;
+    m["HOUSE"] = Building::HOUSE;
+		m["VILLA"] = Building::VILLA;
+		m["GARDEN"] = Building::GARDEN;
+		m["TRADE"] = Building::TRADE;
+		m["CHURCH"] = Building::CHURCH;
+		m["STATUE"] = Building::STATUE;
+		m["FIELD"] = Building::FIELD;
+		m["WATER_MILL"] = Building::WATER_MILL;
+		m["WIND_MILL"] = Building::WIND_MILL;
+		m["TOWER_DEFENSE"] = Building::TOWER_DEFENSE;
+		m["CASTLE"] = Building::CASTLE;
+		m["WALL"] = Building::WALL;
+		m["CUSTOM"] = Building::CUSTOM;
+		return m;
+  }
+
+
+  static const map<std::string,Params> paramMap;
+  static map<std::string,Params> create_map() {
+    map<std::string,Params> m;
+		// INTEREST
+		m["sociabilityWeight"] = _sociabilityWeight;
+		m["sociabilityMin"] = _sociabilityMin;
+		m["sociabilityBest"] = _sociabilityBest;
+		m["sociabilityMax"] = _sociabilityMax;
+
+		m["roadsWeight"] = _roadsWeight;
+		m["roadsMax"] = _roadsMax;
+
+		m["altitudeWeight"] = _altitudeWeight;
+		m["altitudeMax"] = _altitudeMax;
+
+		m["dominationWeight"] = _dominationWeight;
+		m["dominationR"] = _dominationR;
+
+		m["sunWeight"] = _sunWeight;
+
+		m["fortificationWeight"] = _fortificationWeight;
+		m["fortificationRmax"] = _fortificationRmax;
+
+		m["militaryWeight"] = _militaryWeight;
+		m["militaryRmax"] = _militaryRmax;
+
+		m["waterWeight"] = _waterWeight;
+		m["waterRmax"] = _waterRmax;
+
+		m["cultWeight"] = _cultWeight;
+		m["cultRmax"] = _cultRmax;
+
+		// FEASABILITY
+		m["spaceMin"] = _spaceMin;
+		m["slopeVarMax"] = _slopeVarMax;
+		m["slopeMax"] = _slopeMax;
+		m["waterFeasability"] = _waterFeasability;
+		m["vegetationFeasability"] = _vegetationFeasability;
+		return m;
+  }
+
 public:
-	BuildingsAtlas() {
-		for (unsigned int i = 0; i < Building::CUSTOM; ++i) {
-			_parameters.pushLast(Table<float>());
-			_parameters[i].resize(_vegetationFeasability + 1);
-			for (unsigned int j = 0; j < _vegetationFeasability + 1; ++j) {
-				_parameters[i][j] = 0;
-			}
-		}
-	}
+	BuildingsAtlas();
 
 	void setParameters(Building::Type type, Params param, float value) {
 		_parameters[type][param] = value;
 	}
 
-	void updateParameters(Building &buildingToParam, Building::Type type) {
-		buildingToParam._type = type;
-
-		buildingToParam._sociabilityWeight = getParameter(buildingToParam._type, _sociabilityWeight);
-		buildingToParam._sociabilityMin = getParameter(buildingToParam._type, _sociabilityMin);
-		buildingToParam._sociabilityBest = getParameter(buildingToParam._type, _sociabilityBest);
-		buildingToParam._sociabilityMax = getParameter(buildingToParam._type, _sociabilityMax);
-		buildingToParam._roadsWeight = getParameter(buildingToParam._type, _roadsWeight);
-		buildingToParam._roadsMax = getParameter(buildingToParam._type, _roadsMax);
-		buildingToParam._altitudeWeight = getParameter(buildingToParam._type, _altitudeWeight);
-		buildingToParam._altitudeMax = getParameter(buildingToParam._type, _altitudeMax);
-		buildingToParam._dominationWeight = getParameter(buildingToParam._type, _dominationWeight);
-		buildingToParam._dominationR = getParameter(buildingToParam._type, _dominationR);
-		buildingToParam._sunWeight = getParameter(buildingToParam._type, _sunWeight);
-		buildingToParam._fortificationWeight = getParameter(buildingToParam._type, _fortificationWeight);
-		buildingToParam._fortificationRmax = getParameter(buildingToParam._type, _fortificationRmax);
-		buildingToParam._militaryWeight = getParameter(buildingToParam._type, _militaryWeight);
-		buildingToParam._militaryRmax = getParameter(buildingToParam._type, _militaryRmax);
-		buildingToParam._waterWeight = getParameter(buildingToParam._type, _waterWeight);
-		buildingToParam._waterRmax = getParameter(buildingToParam._type, _waterRmax);
-		buildingToParam._cultWeight = getParameter(buildingToParam._type, _cultWeight);
-		buildingToParam._cultRmax = getParameter(buildingToParam._type, _cultRmax);
-		buildingToParam._spaceMin = getParameter(buildingToParam._type, _spaceMin);
-		buildingToParam._slopeVarMax = getParameter(buildingToParam._type, _slopeVarMax);
-		buildingToParam._slopeMax = getParameter(buildingToParam._type, _slopeMax);
-		buildingToParam._waterFeasability = getParameter(buildingToParam._type, _waterFeasability);
-		buildingToParam._vegetationFeasability = getParameter(buildingToParam._type, _vegetationFeasability);
-	}
+	void updateParameters(Building &buildingToParam, Building::Type type);
 
 	float getParameter(Building::Type type, Params param) {
 		return _parameters[type][param];
 	}
 
 }; // class Atlas
+
 
 #endif // BUILDINGS_ATLAS_H
