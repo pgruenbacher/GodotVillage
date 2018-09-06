@@ -14,22 +14,19 @@
 #include <stdlib.h>
 #include <time.h>
 
-class Tile{
-public :
-
-	enum Type{ ROUND,
-		   FLAT,
-		   CHAOS
+class Tile {
+public:
+	enum Type { ROUND,
+		FLAT,
+		CHAOS
 	};
 
 	Quad _quad;
 	Mesh _mesh;
 	Type _type;
 
-        Tile(Quad quad, Type type)
-		: _quad(quad)
-		, _type(type)
-	{}
+	Tile(Quad quad, Type type)
+			: _quad(quad), _type(type) {}
 
 	Mesh generate();
 

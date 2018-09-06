@@ -10,21 +10,18 @@
 #include "../House.h"
 #include "InterestFunctor.h"
 
-
 template <class C, class K, class V>
-class HouseInterestFunctor : public InterestFunctor<C,K,V>{
+class HouseInterestFunctor : public InterestFunctor<C, K, V> {
 
-protected :
+protected:
 	HouseType _houseType;
-	
-public :
-        HouseInterestFunctor(){}
-        void setHouseType(HouseType type) { _houseType = type; }
-        
-	C evaluate(const K& position, HouseType housetype, Layout<C,K,V>* layout)
-	{
-	}
 
+public:
+	HouseInterestFunctor() {}
+	void setHouseType(HouseType type) { _houseType = type; }
+
+	C evaluate(const K &position, HouseType housetype, Layout<C, K, V> *layout) {
+	}
 
 }; // class HouseInterestFunctor
 

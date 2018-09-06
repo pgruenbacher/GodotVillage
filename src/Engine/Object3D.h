@@ -9,17 +9,15 @@
 
 #include "Node.h"
 
-class Object3D
-{
-protected :
-    Node _node;
+class Object3D {
+protected:
+	Node _node;
 
-public :
-    Object3D() {}
-    Node& getNode()
-    {
-        return _node;
-    }
+public:
+	Object3D() {}
+	Node &getNode() {
+		return _node;
+	}
 
 }; // class Object3D
 

@@ -11,21 +11,19 @@
 #include "Camera.h"
 
 /** Contains the objects. */
-class Scene
-{
+class Scene {
 
-private :
-    Terrain* _terrain;
-    Camera*  _camera;
+private:
+	Terrain *_terrain;
+	Camera *_camera;
 
-public :
+public:
+	Scene();
+	void setTerrain(Terrain *terrain);
+	Terrain *getTerrain();
 
-    Scene();
-    void setTerrain(Terrain* terrain);
-    Terrain* getTerrain();
-
-    void setCamera(Camera* camera);
-    Camera* getCamera();
+	void setCamera(Camera *camera);
+	Camera *getCamera();
 
 }; // class Scene
 

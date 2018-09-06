@@ -7,27 +7,21 @@
 #include "Scene.h"
 
 Scene::Scene()
-    : _terrain(NULL)
-    , _camera(NULL)
-{
+		: _terrain(NULL), _camera(NULL) {
 }
 
-void Scene::setTerrain(Terrain* terrain)
-{
-    _terrain = terrain;
+void Scene::setTerrain(Terrain *terrain) {
+	_terrain = terrain;
 }
 
-Terrain* Scene::getTerrain()
-{
-    return _terrain;
+Terrain *Scene::getTerrain() {
+	return _terrain;
 }
 
-void Scene::setCamera(Camera* camera)
-{
-    _camera = camera;
+void Scene::setCamera(Camera *camera) {
+	_camera = camera;
 }
 
-Camera* Scene::getCamera()
-{
-    return _camera;
+Camera *Scene::getCamera() {
+	return _camera;
 }

@@ -7,19 +7,10 @@
 #include "QuadFootPrint.h"
 #include "Cave.h"
 
-
-
-
-
-
-
-
-
-Mesh QuadFootPrint::generate()
-{
+Mesh QuadFootPrint::generate() {
 	_mesh.empty();
 
-	// Find the min and the max height for the current quad	
+	// Find the min and the max height for the current quad
 	float minY = _quad._points[0].y;
 	minY = MIN(minY, _quad._points[1].y);
 	minY = MIN(minY, _quad._points[2].y);
@@ -30,7 +21,6 @@ Mesh QuadFootPrint::generate()
 	maxY = MAX(maxY, _quad._points[2].y);
 	maxY = MAX(maxY, _quad._points[3].y);
 
-
 	Quad ground = _quad;
 	ground.p0().y = minY;
 	ground.p1().y = minY;
@@ -38,8 +28,8 @@ Mesh QuadFootPrint::generate()
 	ground.p3().y = minY;
 
 	float height;
-	float rd = float((rand() % 1000)+1) / 1000.0;
-	height = float ( rd*rd* 3.0);
+	float rd = float((rand() % 1000) + 1) / 1000.0;
+	height = float(rd * rd * 3.0);
 
 	Cave cave(ground, height);
 	_mesh += cave.generate();
@@ -98,13 +88,9 @@ Mesh QuadFootPrint::generate()
 	if (streetViews.getSize())
 	{
 		*/
-	
-	
-	
 
 	return _mesh;
 }
-
 
 /*
 Mesh QuadFootPrint::generate()
@@ -262,4 +248,3 @@ Mesh QuadFootPrint::generate()
 	return _mesh;		
 }
 */
-

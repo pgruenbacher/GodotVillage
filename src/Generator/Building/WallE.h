@@ -7,25 +7,22 @@
 #ifndef WALLE_H
 #define WALLE_H
 
-#include "Quad.h"
 #include "../../Engine/Mesh.h"
+#include "Quad.h"
 
-class WallE{
-public :
+class WallE {
+public:
 	Mesh _mesh;
 	Quad _quad;
-		
-	WallE()
-	{
+
+	WallE() {
 	}
 
-        WallE(Quad quad)
-	: _quad(quad)
-	{
+	WallE(Quad quad)
+			: _quad(quad) {
 	}
 
-	Mesh generate()
-	{
+	Mesh generate() {
 		_mesh.empty();
 
 		_mesh += _quad.generate();

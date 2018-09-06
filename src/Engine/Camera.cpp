@@ -12,90 +12,70 @@
 #include <math.h>
 #include <iostream>
 
-
 Camera::Camera(Vector3F position,
-               Quaternion orientation,
-               float viewAngle,
-               float ratio,
-               float near,
-               float far)
-    : _node(new Node(position, orientation))
-    , _viewAngle(viewAngle)
-    , _ratio(ratio)
-    , _nearDistance(near)
-    , _farDistance(far)
-{
+		Quaternion orientation,
+		float viewAngle,
+		float ratio,
+		float near,
+		float far)
+		: _node(new Node(position, orientation)), _viewAngle(viewAngle), _ratio(ratio), _nearDistance(near), _farDistance(far) {
 }
 
-void Camera::updateTransformMatrix()
-{
-    // Update the view matrix
-    /*
+void Camera::updateTransformMatrix() {
+	// Update the view matrix
+	/*
     _viewMatrix = TransformMatrix::rotation(- (_node->getOrientationWorld()))
     * TransformMatrix::translation(- (_node->getPositionWorld()));
     */
-    _viewMatrix = TransformMatrix::invert(_node->getTransformWorld());
+	_viewMatrix = TransformMatrix::invert(_node->getTransformWorld());
 
-    // Update the projection matrix
-    _projectionMatrix =  TransformMatrix::projection(_nearDistance,
-                         _farDistance,
-                         _viewAngle,
-                         _ratio);
+	// Update the projection matrix
+	_projectionMatrix = TransformMatrix::projection(_nearDistance,
+			_farDistance,
+			_viewAngle,
+			_ratio);
 }
 
-TransformMatrix Camera::getViewMatrix()
-{
-    return _viewMatrix;
+TransformMatrix Camera::getViewMatrix() {
+	return _viewMatrix;
 }
 
-TransformMatrix Camera::getProjectionMatrix()
-{
-    return _projectionMatrix;
+TransformMatrix Camera::getProjectionMatrix() {
+	return _projectionMatrix;
 }
 
-Node* Camera::getNode()
-{
-    return _node;
+Node *Camera::getNode() {
+	return _node;
 }
 
-Vector3F Camera::getTarget() const
-{
-    return _node->getPosition()+_node->getForward();
+Vector3F Camera::getTarget() const {
+	return _node->getPosition() + _node->getForward();
 }
 
-float Camera::getViewAngle() const
-{
-    return _viewAngle;
+float Camera::getViewAngle() const {
+	return _viewAngle;
 }
 
-int Camera::getNearDistance() const
-{
-    return _nearDistance;
+int Camera::getNearDistance() const {
+	return _nearDistance;
 }
 
-int Camera::getFarDistance() const
-{
-    return _farDistance;
+int Camera::getFarDistance() const {
+	return _farDistance;
 }
 
-void Camera::setViewAngle(float angleView)
-{
-    _viewAngle = angleView;
+void Camera::setViewAngle(float angleView) {
+	_viewAngle = angleView;
 }
 
-void Camera::setNearDistance(float near)
-{
-    _nearDistance = near;
+void Camera::setNearDistance(float near) {
+	_nearDistance = near;
 }
 
-void Camera::setFarDistance(float far)
-{
-    _farDistance = far;
+void Camera::setFarDistance(float far) {
+	_farDistance = far;
 }
 
-void Camera::setRatio(float ratio)
-{
-    _ratio = ratio;
+void Camera::setRatio(float ratio) {
+	_ratio = ratio;
 }
-
-

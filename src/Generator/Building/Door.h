@@ -9,17 +9,16 @@
 
 #include "../../Engine/Mesh.h"
 #include "Quad.h"
-#include "WallE.h"
 #include "Stair.h"
+#include "WallE.h"
 
-class Door{
-public :
+class Door {
+public:
 	Quad _quad;
 	Mesh _mesh;
 
-	Door (Quad quad)
-		: _quad(quad)
-	{}
+	Door(Quad quad)
+			: _quad(quad) {}
 
 	Mesh generate();
 

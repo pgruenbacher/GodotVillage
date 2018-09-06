@@ -7,19 +7,19 @@
 #ifndef SCENARIO_H
 #define SCENARIO_H
 
-#include "Sequence.h"
 #include "../Utils/LinkedList.h"
+#include "Sequence.h"
 
-class Scenario{
-private :
-        LinkedList<Sequence> _sequences;
-public :
-        Scenario(){}
-        void addSequence(const Sequence& sequence)
-        {
-                _sequences.pushLast(sequence);
-        }
-        LinkedList<Sequence> getSequences() const { return _sequences; }
+class Scenario {
+private:
+	LinkedList<Sequence> _sequences;
+
+public:
+	Scenario() {}
+	void addSequence(const Sequence &sequence) {
+		_sequences.pushLast(sequence);
+	}
+	LinkedList<Sequence> getSequences() const { return _sequences; }
 
 }; // class Scenario
 

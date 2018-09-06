@@ -7,12 +7,11 @@
 #ifndef INTEREST_FUNCTOR_H
 #define INTEREST_FUNCTOR_H
 
-
 template <class C, class K, class V>
-class InterestFunctor{
+class InterestFunctor {
 
-public :
-	virtual C evaluate(const K& key, HouseType housetype, Layout<C,K,V>* layout) = 0;
+public:
+	virtual C evaluate(const K &key, HouseType housetype, Layout<C, K, V> *layout) = 0;
 
 }; // class InterestFunctor
 

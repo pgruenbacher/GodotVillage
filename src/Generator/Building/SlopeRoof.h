@@ -11,30 +11,29 @@
 #include "Chimney.h"
 #include "Quad.h"
 #include "TilesRoof.h"
+#include "Triangg.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-class SlopeRoof{
-public :
+class SlopeRoof {
+public:
 	Quad _quad;
 	Mesh _mesh;
 
-	SlopeRoof(){}
+	SlopeRoof() {}
 
 	SlopeRoof(Quad quad)
-		: _quad(quad)
-	{}
+			: _quad(quad) {}
 
-	Mesh generate()
-	{
+	Mesh generate() {
 		_mesh.empty();
 
-		float backHeight  = 2.0f;
+		float backHeight = 2.0f;
 		float frontHeight = 0.1f;
-		float frontDepth  = 0.2f;
-		float frontOffset = (backHeight - frontHeight) * (frontDepth / norm( _quad.p01()));
+		float frontDepth = 0.2f;
+		float frontOffset = (backHeight - frontHeight) * (frontDepth / norm(_quad.p01()));
 
 		Vector3F pp0, pp1, pp2, pp3, pp4, pp5;
 		pp0 = _quad.p0() - frontDepth * normalize(_quad.p01()) - frontOffset * _quad.normal();
@@ -62,26 +61,19 @@ public :
 		_mesh += t0.generate();
 		_mesh += t1.generate();
 
-
 		float random = float(rand() % 1000) / 1000.f;
 		Tile::Type type;
-		if (random < 0.5)	    
-		{
-			type = Tile::ROUND;		
-		}
-		else if (random < 0.85)
-		{
+		if (random < 0.5) {
+			type = Tile::ROUND;
+		} else if (random < 0.85) {
 			type = Tile::FLAT;
-		}
-		else
-		{
+		} else {
 			type = Tile::CHAOS;
 		}
 
-
 		TilesRoof tiles(q2, type);
 		_mesh += tiles.generate();
-		
+
 		Chimney ch(q2.rotateToY());
 		_mesh += ch.generate();
 
@@ -89,6 +81,5 @@ public :
 	}
 
 }; // class SlopeRoof
-
 
 #endif // SLOPE_ROOF_H

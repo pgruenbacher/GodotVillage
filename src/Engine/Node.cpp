@@ -9,208 +9,166 @@
 
 #include <GL/glew.h>
 
-#include "Node.h"
 #include "Camera.h"
 #include "Mesh.h"
-#include <cmath>
+#include "Node.h"
 #include <stdio.h>
+#include <cmath>
 
-
-
-Node::Node(const Vector3F& position, const Quaternion& orientation, const Vector3F& scale)
-    : _position(position)
-    , _orientation(orientation)
-    , _scale(scale)
-    , _forward(-Vector3F::ZAXIS)
-    , _left(-Vector3F::XAXIS)
-    , _father(NULL)
-{
-    _updateTransform();
-    _updateLandmark();
+Node::Node(const Vector3F &position, const Quaternion &orientation, const Vector3F &scale)
+		: _position(position), _orientation(orientation), _scale(scale), _forward(-Vector3F::ZAXIS), _left(-Vector3F::XAXIS), _father(NULL) {
+	_updateTransform();
+	_updateLandmark();
 }
 
-Node::~Node()
-{
+Node::~Node() {
 }
 
-
-Vector3F Node::getPosition() const
-{
-    return _position;
+Vector3F Node::getPosition() const {
+	return _position;
 }
 
-Vector3F Node::getPositionWorld() const
-{
-    if(_father == NULL)
-    {
-        return _father->getTransformWorld()*_position;
-    }
-    return _position;
+Vector3F Node::getPositionWorld() const {
+	if (_father == NULL) {
+		return _father->getTransformWorld() * _position;
+	}
+	return _position;
 }
 
-Vector3F Node::getScale() const
-{
-    return _scale;
+Vector3F Node::getScale() const {
+	return _scale;
 }
 
-Vector3F Node::getScaleWorld() const
-{
-    if(_father == NULL)
-    {
-        /** TO DO */
-    }
-    return _scale;
+Vector3F Node::getScaleWorld() const {
+	if (_father == NULL) {
+		/** TO DO */
+	}
+	return _scale;
 }
 
-Quaternion Node::getOrientation() const
-{
-    return _orientation;
+Quaternion Node::getOrientation() const {
+	return _orientation;
 }
 
-Quaternion Node::getOrientationWorld() const
-{
-    if(_father == NULL)
-    {
-        /** TO DO */
-    }
-    return _orientation;
+Quaternion Node::getOrientationWorld() const {
+	if (_father == NULL) {
+		/** TO DO */
+	}
+	return _orientation;
 }
 
-Vector3F Node::getForward() const
-{
-    return _forward;
+Vector3F Node::getForward() const {
+	return _forward;
 }
 
-Vector3F Node::getUp() const
-{
-    return _up;
+Vector3F Node::getUp() const {
+	return _up;
 }
 
-Vector3F Node::getLeft() const
-{
-    return _left;
+Vector3F Node::getLeft() const {
+	return _left;
 }
 
-void Node::setPosition(const Vector3F& position)
-{
-    _position = position;
+void Node::setPosition(const Vector3F &position) {
+	_position = position;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
-void Node::setOrientation(const Quaternion& orientation)
-{
-    _orientation = orientation;
+void Node::setOrientation(const Quaternion &orientation) {
+	_orientation = orientation;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::translate(const Vector3F& move)
-{
-    _position += move;
+void Node::translate(const Vector3F &move) {
+	_position += move;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::translate(float dx, float dy, float dz)
-{
-    _position += Vector3F(dx,dy,dz);
+void Node::translate(float dx, float dy, float dz) {
+	_position += Vector3F(dx, dy, dz);
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::rotate(float rx, float ry, float rz)
-{
-    rotate(Quaternion::createFromAxisAndAngle(rx,Vector3F::XAXIS));
-    rotate(Quaternion::createFromAxisAndAngle(ry,Vector3F::YAXIS));
-    rotate(Quaternion::createFromAxisAndAngle(rz,Vector3F::ZAXIS));
+void Node::rotate(float rx, float ry, float rz) {
+	rotate(Quaternion::createFromAxisAndAngle(rx, Vector3F::XAXIS));
+	rotate(Quaternion::createFromAxisAndAngle(ry, Vector3F::YAXIS));
+	rotate(Quaternion::createFromAxisAndAngle(rz, Vector3F::ZAXIS));
 }
 
-void Node::moveForward(float displacement)
-{
-    _position += _forward * displacement;
+void Node::moveForward(float displacement) {
+	_position += _forward * displacement;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::moveLeft(float displacement)
-{
-    _position += _left * displacement;
+void Node::moveLeft(float displacement) {
+	_position += _left * displacement;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::moveUp(float displacement)
-{
-    _position += _up * displacement;
+void Node::moveUp(float displacement) {
+	_position += _up * displacement;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::_updateTransform()
-{
-    _transform = TransformMatrix::translation(_position)
-                 * TransformMatrix::scaling(_scale)
-                 * TransformMatrix::rotation(_orientation);
+void Node::_updateTransform() {
+	_transform = TransformMatrix::translation(_position) * TransformMatrix::scaling(_scale) * TransformMatrix::rotation(_orientation);
 }
 
-void Node::_updateLandmark()
-{
-    _forward = normalize(TransformMatrix::rotation(_orientation) * Vector3F(0.0, 0.0, - 1.0));
-    _left    = normalize(TransformMatrix::rotation(_orientation) * Vector3F(-1.0, 0.0, 0.0));
-    _up      = crossProduct(_forward, _left);
+void Node::_updateLandmark() {
+	_forward = normalize(TransformMatrix::rotation(_orientation) * Vector3F(0.0, 0.0, -1.0));
+	_left = normalize(TransformMatrix::rotation(_orientation) * Vector3F(-1.0, 0.0, 0.0));
+	_up = crossProduct(_forward, _left);
 }
 
-void Node::rotateAroundForward(float angle)
-{
-    rotate(Quaternion::createFromAxisAndAngle(angle, _forward));
+void Node::rotateAroundForward(float angle) {
+	rotate(Quaternion::createFromAxisAndAngle(angle, _forward));
 }
 
-void Node::rotateAroundLeft(float angle)
-{
-    rotate(Quaternion::createFromAxisAndAngle(angle, _left));
+void Node::rotateAroundLeft(float angle) {
+	rotate(Quaternion::createFromAxisAndAngle(angle, _left));
 }
 
-void Node::rotateAroundUp(float angle)
-{
-    rotate(Quaternion::createFromAxisAndAngle(angle, _up));
+void Node::rotateAroundUp(float angle) {
+	rotate(Quaternion::createFromAxisAndAngle(angle, _up));
 }
 
-void Node::rotateAroundAxis(float angle, const Vector3F& axis)
-{
-    rotate(Quaternion::createFromAxisAndAngle(angle, axis));
+void Node::rotateAroundAxis(float angle, const Vector3F &axis) {
+	rotate(Quaternion::createFromAxisAndAngle(angle, axis));
 }
 
-void Node::rotate(const Quaternion& rot)
-{
-    _orientation = rot * _orientation;
+void Node::rotate(const Quaternion &rot) {
+	_orientation = rot * _orientation;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::setScale(const Vector3F& newScale)
-{
-    _scale = newScale;
+void Node::setScale(const Vector3F &newScale) {
+	_scale = newScale;
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
 
-void Node::setScale(float sx, float sy, float sz)
-{
-    _scale = Vector3F(sx, sy, sz);
+void Node::setScale(float sx, float sy, float sz) {
+	_scale = Vector3F(sx, sy, sz);
 
-    _updateTransform();
-    _updateLandmark();
+	_updateTransform();
+	_updateLandmark();
 }
-
 
 /*
 void Node::draw(SmartPointer<Camera> camera)
@@ -262,9 +220,8 @@ void Node::draw(SmartPointer<Camera> camera)
 }
 */
 
-TransformMatrix Node::getTransform() const
-{
-    return _transform;
+TransformMatrix Node::getTransform() const {
+	return _transform;
 }
 
 /*
@@ -284,12 +241,9 @@ Error::Errors Node::addChildNode(SmartPointer<Node> node)
 }
 */
 
-TransformMatrix Node::getTransformWorld() const
-{
-    if(_father == NULL)
-    {
-        return _father->getTransformWorld() * _transform;
-    }
-    return _transform;
+TransformMatrix Node::getTransformWorld() const {
+	if (_father == NULL) {
+		return _father->getTransformWorld() * _transform;
+	}
+	return _transform;
 }
-

@@ -3,19 +3,16 @@
 
 #include "../../Maths/Vector.h"
 
-class Facade{
+class Facade {
 
-public :
-        enum ConstraintType{ FREE
-                           , STREET
-			   , NEIGHBOUR};
+public:
+	enum ConstraintType { FREE,
+		STREET,
+		NEIGHBOUR };
 
-	ConstraintType _constraint;   
-
-
+	ConstraintType _constraint;
 
 	static ConstraintType analysis(Vector3F p0, Vector3F p1, Vector3F normal);
-        
 
 }; // class Facade
 

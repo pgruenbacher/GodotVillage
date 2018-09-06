@@ -8,25 +8,22 @@
 #define Cave_H
 
 #include "../../Engine/Mesh.h"
-#include "Quad.h"
 #include "Door.h"
+#include "Floor.h"
+#include "Quad.h"
 #include "SlopeRoof.h"
 #include "SquareRoof.h"
-#include "Floor.h"
 
-class Cave{
-public :
+class Cave {
+public:
 	Quad _quad;
 	Mesh _mesh;
 	float _height;
 
-	Cave (Quad quad, float height)
-		: _quad(quad)
-		, _height(height)
-	{}
+	Cave(Quad quad, float height)
+			: _quad(quad), _height(height) {}
 
-	Mesh generate()
-	{
+	Mesh generate() {
 		std::cout << "Generate Cave" << std::endl;
 
 		_mesh.empty();
@@ -34,11 +31,9 @@ public :
 		Table<Quad> walls;
 		Quad floor;
 
-
 		// WALLS & FLOOR
 		Table<Quad> ext = _quad.extrude(_height);
-		
-			
+
 		walls.pushLast(ext[1]);
 		walls.pushLast(ext[2]);
 		walls.pushLast(ext[3]);
@@ -46,19 +41,16 @@ public :
 		floor = ext[0];
 
 		//_mesh += generateTable(walls);
-		
 
 		//_mesh += walls[1].generate();
 		//_mesh += walls[2].generate();
 		//_mesh += walls[3].generate();
 
-
-		Quad doorq(Vector3F(0,0,0),
-			   Vector3F(1,0,0),
-			   Vector3F(1,2,0),
-			   Vector3F(0,2,0));
+		Quad doorq(Vector3F(0, 0, 0),
+				Vector3F(1, 0, 0),
+				Vector3F(1, 2, 0),
+				Vector3F(0, 2, 0));
 		Table<Quad> doorquad;
-
 
 		int doorPos = -1;
 
@@ -74,30 +66,25 @@ public :
 		{
 			walls.pushLast(ext[free[i]+1]);
 		}
-		*/	
+		*/
 
-
-		for (unsigned int i = 0; i < walls.getSize(); ++i)
-		{
-			if (positionDoor(walls[i], doorq))
-			{
+		for (unsigned int i = 0; i < walls.getSize(); ++i) {
+			if (positionDoor(walls[i], doorq)) {
 				//doorquad = door.extrude(5.0);
 				Door door(doorq);
 				_mesh += door.generate();
-				
-				
+
 				Table<Quad> doorWall = extract(walls[i], doorq);
-				walls.pushLast(doorWall[0]); 
+				walls.pushLast(doorWall[0]);
 				walls.pushLast(doorWall[3]);
 				_mesh += doorWall[1].generate();
 				_mesh += doorWall[2].generate();
 				doorPos = i;
 				exit;
-			}			
+			}
 		}
 
-		for (unsigned int i = 0; i < walls.getSize(); ++i)
-		{
+		for (unsigned int i = 0; i < walls.getSize(); ++i) {
 			if (i == doorPos)
 				continue;
 
@@ -107,7 +94,7 @@ public :
 
 		Floor floorr(floor, 3.0, 1);
 		_mesh += floorr.generate();
-		
+
 		/*
 		// DOORABLE FACADES
 		float doorFacadeWidth = 2.f;
@@ -134,9 +121,6 @@ public :
 		// WINDOWS
 
 		// OTHER FACADES
-		
-
-		
 
 		return _mesh;
 	}
