@@ -11,6 +11,10 @@
 #include "Building.h"
 #include <map>
 
+// forward declare xml elements
+class TiXmlElement;
+class TiXmlNode;
+
 class BuildingsAtlas {
 public:
 	enum Params {
@@ -58,9 +62,13 @@ public:
 	static const TypeMap typeMap;
   static const ParamMap paramMap;
   static void setParam(Building &building, Params param, float value);
+	bool loadFromXML(const std::string& xmlName);
 
 private:
 	Table<Table<float> > _parameters;
+
+	bool loadBuilding(TiXmlElement* elem);
+	bool loadBuildings(TiXmlNode* rootNode);
 
 
   static TypeMap create_type_map() {

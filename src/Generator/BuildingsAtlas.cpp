@@ -48,116 +48,15 @@ void BuildingsAtlas::updateParameters(Building &buildingToParam, Building::Type 
   buildingToParam._vegetationFeasability = getParameter(buildingToParam._type, _vegetationFeasability);
 }
 
-void BuildingsAtlas::setParam(Building &building, Params param, float value) {
-  switch (param) {
-    case _sociabilityWeight: {
-      building._sociabilityWeight = value;
-      break;
-    }
-    case _sociabilityMin: {
-      building._sociabilityMin = value;
-      break;
-    }
-    case _sociabilityBest: {
-      building._sociabilityBest = value;
-      break;
-    }
-    case _sociabilityMax: {
-      building._sociabilityMax = value;
-      break;
-    }
-    case _roadsWeight: {
-      building._roadsWeight = value;
-      break;
-    }
-    case _roadsMax: {
-      building._roadsMax = value;
-      break;
-    }
-    case _altitudeWeight: {
-      building._altitudeWeight = value;
-      break;
-    }
-    case _altitudeMax: {
-      building._altitudeMax = value;
-      break;
-    }
-    case _dominationWeight: {
-      building._dominationWeight = value;
-      break;
-    }
-    case _dominationR: {
-      building._dominationR = value;
-      break;
-    }
-    case _sunWeight: {
-      building._sunWeight = value;
-      break;
-    }
-    case _fortificationWeight: {
-      building._fortificationWeight = value;
-      break;
-    }
-    case _fortificationRmax: {
-      building._fortificationRmax = value;
-      break;
-    }
-    case _militaryWeight: {
-      building._militaryWeight = value;
-      break;
-    }
-    case _militaryRmax: {
-      building._militaryRmax = value;
-      break;
-    }
-    case _waterWeight: {
-      building._waterWeight = value;
-      break;
-    }
-    case _waterRmax: {
-      building._waterRmax = value;
-      break;
-    }
-    case _cultWeight: {
-      building._cultWeight = value;
-      break;
-    }
-    case _cultRmax: {
-      building._cultRmax = value;
-      break;
-    }
-    case _spaceMin: {
-      building._spaceMin = value;
-      break;
-    }
-    case _slopeVarMax: {
-      building._slopeVarMax = value;
-      break;
-    }
-    case _slopeMax: {
-      building._slopeMax = value;
-      break;
-    }
-    case _waterFeasability: {
-      building._waterFeasability = value;
-      break;
-    }
-    case _vegetationFeasability: {
-      building._vegetationFeasability = value;
-      break;
-    }
-  }
-}
 
-
-bool loadBuilding(TiXmlElement* elem, Building &building) {
-  const char* type = elem->Attribute("type");
-  if (!type) return false;
-  const std::string typeName = std::string(type);
+bool BuildingsAtlas::loadBuilding(TiXmlElement* elem) {
+  const char* ctype = elem->Attribute("type");
+  if (!ctype) return false;
+  const std::string typeName = std::string(ctype);
   if (BuildingsAtlas::typeMap.find(typeName) == BuildingsAtlas::typeMap.end()) {
     return false;
   }
-  building._type = BuildingsAtlas::typeMap.find(typeName)->second;
+  Building::Type type = BuildingsAtlas::typeMap.find(typeName)->second;
 
   BuildingsAtlas::ParamMap::const_iterator it = BuildingsAtlas::paramMap.begin();
   for ( ; it != BuildingsAtlas::paramMap.end(); ++it) {
@@ -167,26 +66,26 @@ bool loadBuilding(TiXmlElement* elem, Building &building) {
     double v;
     if ( elem->Attribute( key, &v ) ) {
       float value = static_cast< float >( v );
-      BuildingsAtlas::setParam(building, param, value);
+      _parameters[type][param] = value;
+      // std::cout << " Type " << typeName << " " << key << ls" " << value << std::endl;
     }
   }
 
 }
 
-bool loadBuildings(TiXmlNode* rootNode) {
+bool BuildingsAtlas::loadBuildings(TiXmlNode* rootNode) {
   TiXmlNode* node = 0;
   for (node = rootNode->FirstChild(); node; node = node->NextSibling()) {
     TiXmlElement* element = node->ToElement();
     if (!element) continue;
 
-    Building building;
-    loadBuilding(element, building);
+    loadBuilding(element);
 
   }
   return true;
 }
 
-bool loadFromXML(const std::string& xmlName) {
+bool BuildingsAtlas::loadFromXML(const std::string& xmlName) {
   TiXmlDocument xml(xmlName);
   bool valid = xml.LoadFile();
 
