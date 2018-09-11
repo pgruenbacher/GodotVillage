@@ -48,16 +48,23 @@ public:
 		_slopeVarMax,
 		_slopeMax,
 		_waterFeasability,
-		_vegetationFeasability
+		_vegetationFeasability,
+
+		NUM_PARAMS
 	};
+
+	typedef map<std::string, Building::Type> TypeMap;
+	typedef map<std::string, Params> ParamMap;
+	static const TypeMap typeMap;
+  static const ParamMap paramMap;
+  static void setParam(Building &building, Params param, float value);
 
 private:
 	Table<Table<float> > _parameters;
 
-	static const map<std::string, Building::Type> typeMap;
 
-  static map<std::string,Building::Type> create_type_map() {
-    map<std::string,Building::Type> m;
+  static TypeMap create_type_map() {
+    TypeMap m;
     m["HOUSE"] = Building::HOUSE;
 		m["VILLA"] = Building::VILLA;
 		m["GARDEN"] = Building::GARDEN;
@@ -75,9 +82,8 @@ private:
   }
 
 
-  static const map<std::string,Params> paramMap;
-  static map<std::string,Params> create_map() {
-    map<std::string,Params> m;
+  static ParamMap create_map() {
+    ParamMap m;
 		// INTEREST
 		m["sociabilityWeight"] = _sociabilityWeight;
 		m["sociabilityMin"] = _sociabilityMin;
